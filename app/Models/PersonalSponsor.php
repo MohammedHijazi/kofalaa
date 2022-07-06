@@ -10,20 +10,25 @@ class PersonalSponsor extends Model
     use HasFactory;
 
     protected $fillable = [
-        'full_name',
         'governorate',
-        'address',
         'city',
         'street',
         'address',
         'phone',
         'mobile',
-        'email',
         'nationality',
-        'country_of_residence',
         'id_number',
         'id_type',
-        'password'
-
+        'sponsor_id'
     ];
+
+    public function sponsor(){
+        return $this->belongsTo(Sponsor::class);
+    }
+
+
+
+
+
+
 }

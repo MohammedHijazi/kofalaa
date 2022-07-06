@@ -13,15 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('institution_sponsors', function (Blueprint $table) {
-            $table->id()->startingValue(100);
-            $table->string('password')->nullable();
+        Schema::create('sponsors', function (Blueprint $table) {
+            $table->id();
             $table->string('name');
-            $table->string('address');
-            $table->string('contact_person');
-            $table->string('primary_phone')->unique();
-            $table->string('secondary_phone')->unique()->nullable();
             $table->string('email')->unique();
+            $table->string('password')->nullable();
+            $table->enum('type',['personal','institution']);
             $table->string('country');
             $table->timestamps();
         });
@@ -34,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('institution_sponsors');
+        Schema::dropIfExists('sponsors');
     }
 };

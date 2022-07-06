@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class PersonalSponsorsFactory extends Factory
+class PersonalSponsorFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -22,6 +22,7 @@ class PersonalSponsorsFactory extends Factory
             'address' => $this->faker->address,
             'city' => $this->faker->city,
             'street' => $this->faker->streetName,
+            'country_of_residence' => $this->faker->country,
             'phone' => $this->faker->phoneNumber,
             'mobile' => $this->faker->phoneNumber,
             'email' => $this->faker->email,

@@ -14,22 +14,17 @@ return new class extends Migration
     public function up()
     {
         Schema::create('personal_sponsors', function (Blueprint $table) {
-            $table->id()->startingValue(100);
-            $table->string('password')->nullable();
-            $table->string('full_name');
+            $table->id();
             $table->string('governorate');
             $table->string('city');
             $table->string('street');
             $table->string('address');
+            $table->string('nationality');
             $table->string('phone')->unique()->nullable();
             $table->string('mobile')->unique();
-            $table->string('email')->unique();
-            $table->string('nationality');
-            $table->string('country_of_residence');
             $table->string('id_number')->unique();
             $table->enum('id_type',['id','passport']);
-
-
+            $table->foreignId('sponsor_id')->constrained('sponsors')->onDelete('cascade');
             $table->timestamps();
         });
     }

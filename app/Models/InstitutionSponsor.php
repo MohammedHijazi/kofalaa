@@ -17,7 +17,14 @@ class InstitutionSponsor extends Model
         'secondary_phone',
         'email',
         'country',
-        'password'
+        'password',
+        'sponsor_id'
     ];
+
+    public function sponsor(){
+        return $this->belongsTo(Sponsor::class);
+    }
+
+
 
 }
