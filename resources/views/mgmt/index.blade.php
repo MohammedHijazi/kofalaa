@@ -28,36 +28,33 @@
                 </thead>
                 <tbody>
                     @foreach($sponsors as $sponsor)
+
                     <tr>
                         <td>{{$sponsor->id}}</td>
-                        @if($sponsor->type == 'person')
-                            <td>{{$sponsor->full_name}}</td>
-                        @else
-                            <td>{{$sponsor->name}}</td>
-                        @endif
+                        <td>{{$sponsor->name}}</td>
 
-                        @if($sponsor->type == 'person')
+                        @if($sponsor->type == 'personal')
                             <td>شخص</td>
                         @else
                             <td>مؤسسة</td>
                         @endif
 
-                        @if($sponsor->type == 'person')
-                            <td>{{$sponsor->country_of_residence}}</td>
+                        <td>{{$sponsor->country}}</td>
+
+                        @if($sponsor->type == 'personal')
+                            <td>{{$sponsor->personalSponsor->address}}</td>
                         @else
-                            <td>{{$sponsor->country}}</td>
+                            <td>{{$sponsor->institutionSponsor->address}}</td>
                         @endif
 
-                        <td>{{$sponsor->address}}</td>
-
-                        @if($sponsor->type == 'person')
-                            <td>{{$sponsor->phone}}</td>
+                        @if($sponsor->type == 'personal')
+                            <td>{{$sponsor->personalSponsor->phone}}</td>
                         @else
-                            <td>{{$sponsor->primary_phone}}</td>
+                            <td>{{$sponsor->institutionSponsor->primary_phone}}</td>
                         @endif
 
 
-                        <td></td>
+                        <td>#</td>
                         <td>
                             <a href="#" class="btn btn-primary">ادارة</a>
 

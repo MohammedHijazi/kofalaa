@@ -10,13 +10,13 @@ class Sponsor extends Model
     use HasFactory;
     protected $fillable = ['name', 'email', 'password', 'country','type'];
 
-    public function personalSponsors()
+    public function personalSponsor()
     {
-        return $this->hasOne(PersonalSponsor::class);
+        return $this->hasOne(PersonalSponsor::class, 'sponsor_id', 'id');
     }
 
-    public function institutionSponsors()
+    public function institutionSponsor()
     {
-        return $this->hasOne(InstitutionSponsor::class);
+        return $this->hasOne(InstitutionSponsor::class, 'sponsor_id', 'id');
     }
 }

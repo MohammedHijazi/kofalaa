@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\InstitutionSponsor;
 use App\Models\PersonalSponsor;
+use App\Models\Sponsor;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -11,9 +12,9 @@ class HomeController extends Controller
 
     public function index()
     {
-        $personal_sponsors=PersonalSponsor::inRandomOrder()->get();
-        $institution_sponsors=InstitutionSponsor::inRandomOrder()->get();
-        $sponsors=$personal_sponsors->concat($institution_sponsors)->shuffle();
+        $sponsors = Sponsor::all();
+
+
         return view('mgmt.index',['sponsors'=>$sponsors]);
     }
 }
