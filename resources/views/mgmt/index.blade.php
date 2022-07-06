@@ -53,11 +53,9 @@
                             <td>{{$sponsor->institutionSponsor->primary_phone}}</td>
                         @endif
 
-
                         <td>#</td>
                         <td>
                             <a href="#" class="btn btn-primary">ادارة</a>
-
                         </td>
                     </tr>
                     @endforeach

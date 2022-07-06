@@ -17,3 +17,12 @@ button, a {
     font-size: 20px;
     margin: 15px 400px 15px 0px;
 }
+
+
+#form-one{
+    display: block;
+}
+
+#form-two{
+    display: none;
+}

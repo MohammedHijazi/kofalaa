@@ -31,5 +31,6 @@ class DatabaseSeeder extends Seeder
 //        PersonalSponsor::factory(10)->create();
 //        InstitutionSponsor::factory(10)->create();
 
+        $this->call(CountrySeeder::class);
     }
 }
