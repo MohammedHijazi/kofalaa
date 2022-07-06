@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Sponsor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,15 +17,13 @@ class InstitutionSponsorFactory extends Factory
      */
     public function definition()
     {
+        $sponsors = Sponsor::pluck('id')->toArray();
         return [
-            'name' => $this->faker->company,
+            'sponsor_id'=>$this->faker->unique()->randomElement($sponsors),
             'address' => $this->faker->address,
             'contact_person' => $this->faker->name,
             'primary_phone' => $this->faker->phoneNumber,
             'secondary_phone' => $this->faker->phoneNumber,
-            'email' => $this->faker->email,
-            'country' => $this->faker->country,
-            'password' => null,
         ];
     }
 }
