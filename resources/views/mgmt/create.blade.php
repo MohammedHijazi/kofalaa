@@ -39,9 +39,9 @@
         <div class="location" style="margin-top: 15px">
             <label for="">المحافظة</label>
             <select name="governorate">
-                <option value="">ss</option>
-                <option value="">ss</option>
-                <option value="">ss</option>
+                @foreach($gevernorates as $gevernorate)
+                    <option value="{{$gevernorate->name}}">{{$gevernorate->name}}</option>
+                @endforeach
             </select>
             <label for="" style="margin-right: 15px">المدينة</label>
             <select>

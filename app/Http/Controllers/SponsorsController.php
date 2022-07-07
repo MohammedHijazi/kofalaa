@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Country;
+use App\Models\Governorate;
 use Illuminate\Http\Request;
 
 class SponsorsController extends Controller
@@ -17,8 +18,11 @@ class SponsorsController extends Controller
     public function create()
     {
         $countries = Country::all();
+        $gevernorates = Governorate::all();
+
         return view('mgmt.create',[
             'countries' => $countries,
+            'gevernorates' => $gevernorates
         ]);
     }
 
