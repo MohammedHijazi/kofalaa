@@ -32,6 +32,25 @@ class AdminController extends Controller
         return view('admin.cities.index',['cities'=>$cities]);
     }
 
+    public function createCity()
+    {
+        $governorates=Governorate::all();
+        return view('admin.cities.create',['governorates'=>$governorates]);
+    }
+
+    public function storeCity(Request $request)
+    {
+        $request->validate([
+            'name'=>'required|unique:cities',
+            'governorate_id'=>'required'
+        ]);
+        $city=new City();
+        $city->name=$request->name;
+        $city->governorate_id=$request->governorate_id;
+        $city->save();
+        return redirect()->route('admin.cities.index')->with('success','City created successfully');
+    }
+
 
 
 }
