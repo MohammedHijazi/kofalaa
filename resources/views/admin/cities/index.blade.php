@@ -12,6 +12,7 @@
                 <tr>
                     <th>#</th>
                     <th>الاسم</th>
+                    <td>اسم المحافظة</td>
                     <th>عمليات</th>
                 </tr>
                 </thead>
@@ -21,6 +22,7 @@
                     <tr>
                         <td>{{$city->id}}</td>
                         <td>{{$city->name}}</td>
+                        <td>{{$city->governorate->name}}</td>
 
                         <td>
                             <a href="#" class="btn btn-primary">ادارة</a>

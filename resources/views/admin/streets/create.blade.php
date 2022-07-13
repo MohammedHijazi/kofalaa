@@ -7,7 +7,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">اضافة مدينة</div>
+                    <div class="card-header">اضافة حي </div>
 
                     <div class="card-body">
 
@@ -27,7 +27,7 @@
                                     @endif
 
 
-                                    <form method="post" action="{{route('cities.store')}}" enctype="multipart/form-data">
+                                    <form method="post" action="{{route('streets.store')}}" enctype="multipart/form-data">
                                         @csrf
                                         <div class="form-group row">
                                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('name') }}</label>
@@ -45,18 +45,18 @@
 
 
                                         <div class="form-group row">
-                                            <label for="governorate_id" class="col-md-4 col-form-label text-md-right">{{ __('governorate_id') }}</label>
+                                            <label for="city_id" class="col-md-4 col-form-label text-md-right">{{ __('city_id') }}</label>
 
                                             <div class="col-md-6">
-                                                <select id="governorate_id" required name="governorate_id"  class="form-control @error('governorate_id') is-invalid @enderror" >
-                                                    @foreach ($governorates as $governorate)
-                                                        <option value="{{$governorate->id}}">{{$governorate->name}}</option>
+                                                <select id="city_id" required name="city_id"  class="form-control @error('city_id') is-invalid @enderror" >
+                                                    @foreach ($cities as $city)
+                                                        <option value="{{$city->id}}">{{$city->name}}</option>
                                                     @endforeach
 
                                                 </select>
 
 
-                                                @error('governorate_id')
+                                                @error('city_id')
                                                 <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>

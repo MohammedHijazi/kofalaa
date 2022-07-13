@@ -44,21 +44,21 @@
                 @endforeach
             </select>
             <label for="" style="margin-right: 15px">المدينة</label>
-            <select>
-                <option value="">ss</option>
-                <option value="">ss</option>
-                <option value="">ss</option>
+            <select name="cities">
+                @foreach($cities as $city)
+                    <option value="{{$city->name}}">{{$city->name}}</option>
+                @endforeach
             </select>
             <label for="" style="margin-right: 15px">الحي</label>
-            <select>
-                <option value="">ss</option>
-                <option value="">ss</option>
-                <option value="">ss</option>
+            <select name="streets">
+                @foreach($streets as $street)
+                    <option value="{{$street->name}}">{{$street->name}}</option>
+                @endforeach
             </select>
         </div>
         <div class="detailsOfLocation" style="margin-top: 15px">
             <label for="">تفاصيل العنوان</label>
-            <input type="text" style="width: 850px" />
+            <input name="address" type="text" style="width: 850px" />
         </div>
         <div
             class="contactInfo"

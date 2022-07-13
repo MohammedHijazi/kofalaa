@@ -26,5 +26,11 @@ Route::get('admin/governorates',[AdminController::class,'viewGovernorates'])->mi
 Route::get('admin/cities',[AdminController::class,'viewCities'])->middleware(['auth'])->name('cities.view');
 Route::get('admin/cities/create',[AdminController::class,'createCity'])->middleware(['auth'])->name('cities.create');
 Route::post('admin/cities/store',[AdminController::class,'storeCity'])->middleware(['auth'])->name('cities.store');
+Route::get('admin/cities/{id}/edit',[AdminController::class,'editCity'])->middleware(['auth'])->name('cities.edit');
+Route::get('admin/streets',[AdminController::class,'viewStreets'])->middleware(['auth'])->name('streets.view');
+Route::get('admin/streets/create',[AdminController::class,'createStreet'])->middleware(['auth'])->name('streets.create');
+Route::post('admin/streets/store',[AdminController::class,'storeStreet'])->middleware(['auth'])->name('streets.store');
+
+
 
 require __DIR__.'/auth.php';
