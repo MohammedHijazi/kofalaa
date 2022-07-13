@@ -9,21 +9,31 @@
 
 </head>
 <body>
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        {{ $errors->first() }}
+    </div>
+@endif
 <fieldset style="width: 71%">
     <legend>بيانات الكفيل</legend>
     <div class="personalInstitution">
-        <input type="radio" name="rad" id="radio1" checked />
+        <input type="radio" name="rad" id="radio1" value="personal" checked />
         <label for="personal">شخصي</label>
-        <input type="radio" name="rad" id="radio2" />
+        <input type="radio" name="rad" id="radio2" value="institution" />
         <label for="institution">مؤسسة</label>
     </div>
-    <form action="" id="form-one">
+    <form action="{{route('sponsors.store')}}" method="post" id="form-one">
+        @csrf
+        <input type="hidden" name="ty" value="personal">
         <div class="idSection" style="margin-top: 15px">
             <label for="">بطاقة التعريف</label>
-            <input type="radio" name="id_type" value="id" id="id" />
+            <input checked type="radio" name="id_type" value="id" id="id" />
             <label for="id">هوية</label>
-            <input type="radio" name="id_type" value="passport" id="passport" />
+            <input  type="radio" name="id_type" value="passport" id="passport" />
             <label for="passport">جواز السفر</label>
+
+
             <label for="" style="margin-right: 30px">رقم بطاقة التعريف</label>
             <input type="text" name="id_number" id="idNumber" />
         </div>
@@ -44,13 +54,13 @@
                 @endforeach
             </select>
             <label for="" style="margin-right: 15px">المدينة</label>
-            <select name="cities">
+            <select name="city">
                 @foreach($cities as $city)
                     <option value="{{$city->name}}">{{$city->name}}</option>
                 @endforeach
             </select>
             <label for="" style="margin-right: 15px">الحي</label>
-            <select name="streets">
+            <select name="street">
                 @foreach($streets as $street)
                     <option value="{{$street->name}}">{{$street->name}}</option>
                 @endforeach
@@ -70,20 +80,20 @@
         >
             <div>
                 <label for="">الهاتف</label>
-                <input type="text" name="" id="" />
+                <input type="text" name="phone" id="" />
             </div>
             <div>
                 <label for="">الجوال</label>
-                <input type="text" name="" id="" />
+                <input type="text" name="mobile" id="" />
             </div>
             <div>
                 <label for="">البريد</label>
-                <input type="text" name="" id="" />
+                <input type="text" name="email" id="" />
             </div>
         </div>
         <div class="nationality" style="margin: 15px 0px">
             <label for="">الجنسية</label>
-            <select name="country" id="country">
+            <select name="nationality" id="nationality">
                 @foreach($countries as $country)
                     <option value="{{$country->name}}">{{$country->name}}</option>
                 @endforeach
@@ -95,10 +105,11 @@
                 @endforeach
             </select>
         </div>
-        <button>حفظ</button>
+        <button type="submit">حفظ</button>
     </form>
 
     <form action="" style="text-align: center" id="form-two">
+        @csrf
         <label for="">الدولة</label>
         <select name="country" id="country">
             @foreach($countries as $country)
