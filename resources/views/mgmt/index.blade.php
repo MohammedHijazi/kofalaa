@@ -55,7 +55,7 @@
 
                         <td>#</td>
                         <td>
-                            <a href="#" class="btn btn-primary">ادارة</a>
+                            <a href="{{route('sponsors.profile',$sponsor->id)}}" class="btn btn-primary">عرض</a>
                         </td>
                     </tr>
                     @endforeach

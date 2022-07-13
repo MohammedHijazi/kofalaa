@@ -156,6 +156,14 @@ class SponsorsController extends Controller
         }
     }
 
+    public function profile($id)
+    {
+        $sponsoer = Sponsor::find($id);
+        return view('mgmt.profile',[
+            'sponsor' => $sponsoer
+        ]);
+    }
+
 
     public function show($id)
     {
