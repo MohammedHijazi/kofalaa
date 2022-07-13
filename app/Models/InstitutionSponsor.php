@@ -15,8 +15,6 @@ class InstitutionSponsor extends Model
         'contact_person',
         'primary_phone',
         'secondary_phone',
-        'email',
-        'country',
         'password',
         'sponsor_id'
     ];

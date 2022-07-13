@@ -108,7 +108,7 @@
         <button type="submit">حفظ</button>
     </form>
 
-    <form action="" style="text-align: center" id="form-two">
+    <form action="{{route('sponsors.store')}}" method="post" style="text-align: center" id="form-two">
         @csrf
         <label for="">الدولة</label>
         <select name="country" id="country">
@@ -117,24 +117,24 @@
             @endforeach
         </select><br><br>
         <label for="name">الاسم</label>
-        <input type="text" id="name"><br><br>
+        <input type="text" id="name" name="name"><br><br>
         <label for="responsibleOfContact">مسؤول الإتصال<label>
-                <input type="text" id="responsibleOfContact"><br><br>
+                <input type="text" id="responsibleOfContact" name="contact_person"><br><br>
                 <label for="location">العنوان</label>
-                <input type="text" id="location"><br><br>
+                <input type="text" id="location" name="address"><br><br>
                 <div class="telephone">
                     <div class="tele1">
                         <label for="tele1">الهاتف1</label>
-                        <input type="text" id="tele1">
+                        <input type="text" id="tele1" name="primary_phone">
                     </div><br><br>
                     <div class="tele2">
                         <label for="tele2">الهاتف2</label>
-                        <input type="text" id="tele2">
+                        <input type="text" id="tele2" name="secondary_phone">
                     </div><br><br>
                     <label for="">البريد</label>
-                    <input type="text" name="" id="">
+                    <input type="text" name="email" id="">
                 </div>
-                <button>حفظ</button>
+                <button type="submit">حفظ</button>
     </form>
 
 </fieldset>

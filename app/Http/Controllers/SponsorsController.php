@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\Governorate;
+use App\Models\InstitutionSponsor;
 use App\Models\PersonalSponsor;
 use App\Models\Sponsor;
 use App\Models\Street;
@@ -47,7 +48,7 @@ class SponsorsController extends Controller
                 'last_name' => 'required',
                 'id_number' => 'required|integer|digits:9|digits_between: 0,9|unique:personal_sponsors,id_number',
                 'id_type' => 'required',
-                'phone' => 'required|digits:9|digits_between: 0,10',
+                'phone' => 'digits:9|digits_between: 0,10',
                 'mobile' => 'required|digits:10|digits_between: 0,10',
                 'email' => 'required|email|unique:sponsors,email',
                 'governorate' => 'required',
@@ -104,6 +105,53 @@ class SponsorsController extends Controller
                 DB::rollBack();
                 throw $e;
             }
+
+
+        }else{
+            $request->validate([
+                'name' => 'required',
+                'contact_person'=> 'required',
+                'primary_phone' => 'required|digits:9|digits_between: 0,10',
+                'secondary_phone' => 'digits:9|digits_between: 0,10',
+                'email' => 'required|email|unique:sponsors,email',
+                'address' => 'required',
+                'country'=>'required',
+            ]);
+            DB::beginTransaction();
+            try {
+                $name = $request->name;
+                $email = $request->email;
+                $type = 'institution';
+                $country = $request->country;
+                $address = $request->address;
+                $contact_person = $request->contact_person;
+                $primary_phone = $request->primary_phone;
+                $secondary_phone = $request->secondary_phone;
+
+                //inserting in sponsor table (father table) and getting the ID
+                $sponsor_id = Sponsor::insertGetId([
+                    'name' => $name,
+                    'email' => $email,
+                    'type' => $type,
+                    'country' => $country,
+                ]);
+
+                //inserting in institution sponsor table (son table)
+                InstitutionSponsor::insert([
+                    'sponsor_id' => $sponsor_id,
+                    'address' => $address,
+                    'contact_person' => $contact_person,
+                    'primary_phone' => $primary_phone,
+                    'secondary_phone' => $secondary_phone
+                ]);
+
+                DB::commit();
+                return redirect()->route('home')->with('success', 'Sponsor created successfully');
+
+            }catch (Throwable $e) {
+                DB::rollBack();
+                throw $e;
+             }
 
         }
     }
