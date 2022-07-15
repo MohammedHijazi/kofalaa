@@ -85,7 +85,7 @@ class SponsorsController extends Controller
                 ]);
 
 
-                //inserting in personal sponsor table (son table)
+                //inserting in personal sponsor table (child table)
                 PersonalSponsor::insert([
                     'sponsor_id' => $sponsor_id,
                     'governorate' => $governorate,
@@ -136,7 +136,7 @@ class SponsorsController extends Controller
                     'country' => $country,
                 ]);
 
-                //inserting in institution sponsor table (son table)
+                //inserting in institution sponsor table (child table)
                 InstitutionSponsor::insert([
                     'sponsor_id' => $sponsor_id,
                     'address' => $address,
@@ -167,13 +167,24 @@ class SponsorsController extends Controller
 
     public function show($id)
     {
-        //
+
     }
 
 
     public function edit($id)
     {
-        //
+        $sponsoer = Sponsor::find($id);
+        $countries = Country::all();
+        $gevernorates = Governorate::all();
+        $cities = City::all();
+        $streets = Street::all();
+        return view('mgmt.edit',[
+            'sponsor' => $sponsoer,
+            'countries' => $countries,
+            'gevernorates' => $gevernorates,
+            'cities' => $cities,
+            'streets' => $streets
+        ]);
     }
 
 
