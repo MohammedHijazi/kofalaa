@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth');
+Route::get('/', [SponsorsController::class, 'index'])->name('home')->middleware('auth');
 
 Route::resource('sponsors', 'SponsorsController')->middleware('auth');
 Route::get('sponsors/{id}/profile', [SponsorsController::class,'profile'])->middleware('auth')->name('sponsors.profile');

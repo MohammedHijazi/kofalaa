@@ -113,7 +113,7 @@
             <button type="submit">حفظ</button>
         </form>
     @elseif($sponsor->type == 'institution')
-        <form action="{{route('sponsors.edit',$sponsor->id)}}" method="post" style="text-align: center; display: block" id="form-two">
+        <form action="{{route('sponsors.update',$sponsor->id)}}" method="post" style="text-align: center; display: block" id="form-two">
             @csrf
             @method('put')
             <label for="">الدولة</label>

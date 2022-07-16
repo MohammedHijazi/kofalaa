@@ -18,7 +18,9 @@ class SponsorsController extends Controller
 
     public function index()
     {
-        //
+        $sponsors = Sponsor::all();
+
+        return view('mgmt.index',['sponsors'=>$sponsors]);
     }
 
 
@@ -190,8 +192,113 @@ class SponsorsController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        $sponsor = Sponsor::findOrFail($id);
+        if($sponsor->type == 'personal'){
+            $request->validate([
+                'first_name' => 'required',
+                'second_name' => 'required',
+                'third_name' => 'required',
+                'last_name' => 'required',
+                'id_number' => 'required|integer|digits:9|digits_between: 0,9',
+                'id_type' => 'required',
+                'phone' => 'digits:9|digits_between: 0,10',
+                'mobile' => 'required|digits:10|digits_between: 0,10',
+                'email' => 'required',
+                'governorate' => 'required',
+                'city' => 'required',
+                'street' => 'required',
+                'address' => 'required',
+                'nationality'=>'required',
+                'country'=>'required',
+            ]);
+
+            DB::beginTransaction();
+            try {
+                $name = $request->first_name . ' ' . $request->second_name . ' ' . $request->third_name . ' ' . $request->last_name;
+                $email = $request->email;
+                $country = $request->country;
+                $governorate = $request->governorate;
+                $city = $request->city;
+                $street = $request->street;
+                $address = $request->address;
+                $phone = $request->phone;
+                $mobile = $request->mobile;
+                $nationality = $request->nationality;
+                $id_type = $request->id_type;
+                $id_number = $request->id_number;
+
+                //updating father table
+                $sponsor->name=$name;
+                $sponsor->email=$email;
+                $sponsor->country=$country;
+                $sponsor->save();
+
+                //updating child table
+                $personalSponsor = $sponsor->personalSponsor;
+                $personalSponsor->governorate=$governorate;
+                $personalSponsor->city=$city;
+                $personalSponsor->street=$street;
+                $personalSponsor->address=$address;
+                $personalSponsor->phone=$phone;
+                $personalSponsor->mobile=$mobile;
+                $personalSponsor->nationality=$nationality;
+                $personalSponsor->id_type=$id_type;
+                $personalSponsor->id_number=$id_number;
+                $personalSponsor->save();
+
+                DB::commit();
+                return redirect()->route('home')->with('success', 'Sponsor updated successfully');
+
+            }catch (Throwable $e) {
+                DB::rollBack();
+                throw $e;
+            }
+        }else{
+            $request->validate([
+                'name' => 'required',
+                'contact_person'=> 'required',
+                'primary_phone' => 'required|digits:9|digits_between: 0,10',
+                'secondary_phone' => 'digits:9|digits_between: 0,10',
+                'email' => 'required|email',
+                'address' => 'required',
+                'country'=>'required',
+            ]);
+            DB::beginTransaction();
+            try {
+                $name = $request->name;
+                $email = $request->email;
+                $country = $request->country;
+                $address = $request->address;
+                $contact_person = $request->contact_person;
+                $primary_phone = $request->primary_phone;
+                $secondary_phone = $request->secondary_phone;
+
+                //updating father table
+                $sponsor->name=$name;
+                $sponsor->email=$email;
+                $sponsor->country=$country;
+                $sponsor->save();
+
+                //updating child table
+                $institutionSponsor = $sponsor->institutionSponsor;
+                $institutionSponsor->address=$address;
+                $institutionSponsor->contact_person=$contact_person;
+                $institutionSponsor->primary_phone=$primary_phone;
+                $institutionSponsor->secondary_phone=$secondary_phone;
+                $institutionSponsor->save();
+
+
+
+                DB::commit();
+                return redirect()->route('home')->with('success', 'Sponsor updated successfully');
+
+            }catch (Throwable $e) {
+                DB::rollBack();
+                throw $e;
+            }
+        }
     }
+
 
 
     public function destroy($id)
