@@ -24,7 +24,7 @@ Route::get('sponsors/{id}/profile', [SponsorsController::class,'profile'])->midd
 
 
 Route::get('search', [SearchController::class,'index'])->middleware('auth')->name('search.index');
-Route::post('search', [SearchController::class,'search'])->middleware('auth')->name('search.results');
+Route::get('search/results', [SearchController::class,'search'])->middleware('auth')->name('search.results');
 
 
 

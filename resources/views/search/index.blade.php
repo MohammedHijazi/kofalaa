@@ -16,14 +16,13 @@
         margin-top: 10px;
       "
 >
-    <legend>البحث عن كفيل</legend>
-    <label for="">شخصي</label>
-    <input type="radio" name="type" value="personal"  />
-    <label for="">مؤسسة</label>
-    <input type="radio" name="type" value="institution" />
 
-    <form action="{{route('search.results')}}" method="post">
-        @csrf
+    <form action="{{route('search.results')}}" method="get">
+        <legend>البحث عن كفيل</legend>
+        <label for="">شخصي</label>
+        <input type="radio" name="type" value="personal"  />
+        <label for="">مؤسسة</label>
+        <input type="radio" name="type" value="institution" />
         <table width="520" height="250">
             <tr>
                 <td>الاسم</td>
@@ -34,7 +33,8 @@
             <tr>
                 <td>المحافظة</td>
                 <td colspan="1">
-                    <select name="" id="">
+                    <select  id="" name="gevernorate">
+                        <option value="{{null}}">...</option>
                         @foreach($gevernorates as $gevernorate)
                             <option value="{{$gevernorate->name}}">{{$gevernorate->name}}</option>
                         @endforeach
@@ -42,7 +42,8 @@
                 </td>
                 <td>المدينة</td>
                 <td colspan="1">
-                    <select name="" id="">
+                    <select name="city" id="" >
+                        <option value="{{null}}">...</option>
                         @foreach($cities as $city)
                             <option value="{{$city->name}}">{{$city->name}}</option>
                         @endforeach
@@ -52,7 +53,8 @@
             <tr>
                 <td>الجنسية</td>
                 <td>
-                    <select name="" id="">
+                    <select name="nationality" id="">
+                        <option value="{{null}}">...</option>
                         @foreach($countries as $country)
                             <option value="{{$country->name}}">{{$country->name}}</option>
                         @endforeach
@@ -60,7 +62,8 @@
                 </td>
                 <td>الدولة</td>
                 <td>
-                    <select name="" id="">
+                    <select name="country" id="">
+                        <option value="{{null}}">...</option>
                         @foreach($countries as $country)
                             <option value="{{$country->name}}">{{$country->name}}</option>
                         @endforeach

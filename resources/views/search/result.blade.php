@@ -12,57 +12,36 @@
         <table class="result">
             <th>#</th>
             <th>الاسم</th>
-            <th>النوع</th>
             <th>الدولة</th>
             <th>العنوان</th>
             <th>رقم الهاتف</th>
             <th>عدد المستفيدين</th>
             <th>عمليات</th>
-            <tr>
-                <td>1</td>
-                <td>محمد احمد محمود</td>
-                <td>شخص</td>
-                <td>فلسطين</td>
-                <td>غزة</td>
-                <td>28000000</td>
-                <td>2</td>
-                <td>
-                    <button>ادارة</button
-                    ><button style="background-color: gold; width: 120px">
-                        Send SMS
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>محمد احمد محمود</td>
-                <td>شخص</td>
-                <td>فلسطين</td>
-                <td>غزة</td>
-                <td>28000000</td>
-                <td>2</td>
-                <td>
-                    <button>ادارة</button
-                    ><button style="background-color: gold; width: 120px">
-                        Send SMS
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>محمد احمد محمود</td>
-                <td>شخص</td>
-                <td>فلسطين</td>
-                <td>غزة</td>
-                <td>28000000</td>
-                <td>2</td>
-                <td>
-                    <button>ادارة</button
-                    ><button style="background-color: gold; width: 120px">
-                        Send SMS
-                    </button>
-                </td>
-            </tr>
+
+
+            @foreach($sponsors as $sponsor)
+                <tr>
+                    <td>{{$sponsor->sponsor->id}}</td>
+                    <td>{{$sponsor->sponsor->name}}</td>
+                    <td>{{$sponsor->sponsor->country}}</td>
+                    <td>{{$sponsor->address}}</td>
+
+                    @if($sponsor instanceof \App\Models\InstitutionSponsor)
+                        <td>{{$sponsor->primary_phone}}</td>
+                    @else
+                        <td>{{$sponsor->phone}}</td>
+                    @endif
+                    <td>#</td>
+                    <td>
+                        <button>ادارة</button
+                        ><button style="background-color: gold; width: 120px">
+                            Send SMS
+                        </button>
+                    </td>
+                </tr>
+            @endforeach
+
+
             <tr style="text-align: right">
                 <td colspan="8" style="padding-right: 15px">
                     <a href="#">الاول</a> <a href="#">|السابق</a>
