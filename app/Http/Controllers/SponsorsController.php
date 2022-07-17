@@ -300,9 +300,14 @@ class SponsorsController extends Controller
     }
 
 
-
     public function destroy($id)
     {
-        //
+        $sponsor = Sponsor::findOrFail($id);
+        $sponsor->delete();
+        return redirect()->route('home')->with('success', 'Sponsor deleted successfully');
     }
+
+
+
 }
+

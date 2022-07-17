@@ -9,6 +9,7 @@
     <div class="card ma">
         <div class="card-header" style=" display: flex; justify-content: space-between; align-content: center; align-items: center; ">ادارة الكفلاء
 
+            <a class="btn btn-primary" href="{{route('search.index')}}" role="button">بحث عن كفيل</a>
             <a class="btn btn-primary" href="{{route('sponsors.create')}}" role="button">اضافة كفيل</a>
 
         </div>
