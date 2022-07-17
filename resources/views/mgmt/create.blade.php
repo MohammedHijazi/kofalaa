@@ -48,22 +48,19 @@
 
         <div class="location" style="margin-top: 15px">
             <label for="">المحافظة</label>
-            <select name="governorate">
+            <select name="governorate" id="gov">
+                <option>...</option>
                 @foreach($gevernorates as $gevernorate)
                     <option value="{{$gevernorate->name}}">{{$gevernorate->name}}</option>
                 @endforeach
             </select>
             <label for="" style="margin-right: 15px">المدينة</label>
-            <select name="city">
-                @foreach($cities as $city)
-                    <option value="{{$city->name}}">{{$city->name}}</option>
-                @endforeach
+            <select name="city" id="cit">
+                <option>...</option>
             </select>
             <label for="" style="margin-right: 15px">الحي</label>
-            <select name="street">
-                @foreach($streets as $street)
-                    <option value="{{$street->name}}">{{$street->name}}</option>
-                @endforeach
+            <select name="street" id="str">
+                <option>...</option>
             </select>
         </div>
         <div class="detailsOfLocation" style="margin-top: 15px">
@@ -154,6 +151,48 @@
             $('#form-one').css('display', 'none');
             $('#form-two').css('display', 'block');
         }
+    });
+
+    $('#gov').change(function () {
+        $('#cit').children().remove()
+        $('#cit').append(new Option('...', '...'))
+
+        var gov = $('#gov').val();
+        $.ajax({
+            url: '{{route('data')}}',
+            type: 'get',
+            success: function (data) {
+                $.each(data,function (key,item) {
+                    if (item.name === gov){
+                        $.each(item.cities,function (key,item) {
+                            $('#cit').append('<option value="'+item.name+'">'+item.name+'</option>');
+                        });
+                    }
+                });
+
+            }
+        });
+    });
+    $('#cit').change(function () {
+        $('#str').children().remove()
+        $('#str').append(new Option('...', '...'))
+
+        var cit = $('#cit').val();
+        $.ajax({
+            url: '{{route('data')}}',
+            type: 'get',
+            success: function (data) {
+                $.each(data,function (key,item) {
+                    $.each(item.cities,function (key,item) {
+                        if (item.name === cit){
+                            $.each(item.streets,function (key,item) {
+                                $('#str').append('<option value="'+item.name+'">'+item.name+'</option>');
+                            });
+                        }
+                    });
+                })
+            }
+        });
     });
 </script>
 

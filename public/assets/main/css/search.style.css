@@ -11,11 +11,11 @@ input[type=text]{
     width: 100%;
 }
 .result{
-    width: 600px;
+    width: 100%;
     text-align: center;
     border: 1px solid;
     border-collapse: collapse;
-    margin-right: 50px; 
+
     margin-top: 10px;
     font-size: 20px;
 }
