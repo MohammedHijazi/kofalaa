@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('housing_conditions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('beneficiary_id')->constrained()->onDelete('cascade');
-            $table->enum('housing_type',['own','rented','other'])->default('ranted');
+            $table->enum('housing_type',['own','rented','other'])->default('rented');
             $table->string('rent_amount')->nullable();
             $table->string('number_of_rooms')->nullable();
             $table->string('people_per_room')->nullable();
