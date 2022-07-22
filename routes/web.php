@@ -18,7 +18,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', [SponsorsController::class, 'index'])->name('home')->middleware('auth');
+Route::get('/', [AdminController::class,'home'])->name('home')->middleware('auth');
+
 Route::resource('sponsors', 'SponsorsController')->middleware('auth');
 Route::get('sponsors/{id}/profile', [SponsorsController::class,'profile'])->middleware('auth')->name('sponsors.profile');
 

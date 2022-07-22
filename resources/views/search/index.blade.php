@@ -98,6 +98,6 @@
 </fieldset>
 
 
-<a href="{{route('home')}}" style="font-size: 22px; margin: 0px 500px 0px;">رجوع</a>
+<a href="{{route('sponsors.index')}}" style="font-size: 22px; margin: 0px 500px 0px;">رجوع</a>
 </body>
 </html>
