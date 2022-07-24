@@ -27,6 +27,11 @@ Route::get('sponsors/{id}/profile', [SponsorsController::class,'profile'])->midd
 
 Route::resource('beneficiaries', 'BeneficiariesController')->middleware('auth');
 Route::post('beneficiaries/{id}/add_family_member', [FamilyMembersController::class,'store'])->middleware('auth')->name('beneficiaries.add_family_member');
+Route::get('beneficiaries/family_members/{id}/show', [FamilyMembersController::class,'show'])->middleware('auth')->name('beneficiaries.family_members.show');
+Route::get('beneficiaries/family_members/{id}', [FamilyMembersController::class,'edit'])->middleware('auth')->name('beneficiaries.family_members.edit');
+Route::post('beneficiaries/family_members/{id}', [FamilyMembersController::class,'update'])->middleware('auth')->name('beneficiaries.family_members.update');
+Route::get('beneficiaries/family_members/{id}/destroy', [FamilyMembersController::class,'destroy'])->middleware('auth')->name('beneficiaries.family_members.destroy');
+
 
 Route::get('search', [SearchController::class,'index'])->middleware('auth')->name('search.index');
 Route::get('search/results', [SearchController::class,'search'])->middleware('auth')->name('search.results');

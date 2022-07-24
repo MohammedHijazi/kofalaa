@@ -83,9 +83,9 @@
                                             <td>{{$member->id_number}}</td>
                                             <td>{{$member->health_status}}</td>
                                             <td style="width: 220px">
-                                                <a href="#" class="btn btn-primary" >عرض</a>
-                                                <a href="#" class="btn btn-primary">تعديل</a>
-                                                <a href="#" class="btn btn-danger">حدف</a>
+                                                <a href="{{route('beneficiaries.family_members.show',$member->id)}}" class="btn btn-primary" >عرض</a>
+                                                <a href="{{route('beneficiaries.family_members.edit',$member->id)}}" class="btn btn-primary">تعديل</a>
+                                                <a href="{{route('beneficiaries.family_members.destroy',$member->id)}}" class="btn btn-danger">حدف</a>
                                             </td>
                                         </tr>
                                     @endforeach
