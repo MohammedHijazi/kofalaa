@@ -15,7 +15,7 @@
                                 </a>
                             </div>
                             <div class="col-md-4 ">
-                                <a href="#" class="btn btn-lg btn-block btn-primary">
+                                <a href="{{route('beneficiaries.index')}}" class="btn btn-lg btn-block btn-primary">
                                     المستفيدون
                                     <br>
                                 </a>

@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="{{asset('assets/main/css/bootstrap.min.css')}}">
 
     @yield('styles')
-
 </head>
+
 <body>
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
@@ -34,10 +34,10 @@
                 <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
                         <li class="nav-item">
-                            <a class="nav-link" href="#">الداعمون</a>
+                            <a class="nav-link" href="{{route('sponsors.index')}}">الداعمون</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">المستفيدون</a>
+                            <a class="nav-link" href="{{route('beneficiaries.index')}}">المستفيدون</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -52,8 +52,8 @@
                                     </x-button>
                                 </form>
 
-                                <a class="dropdown-item" href="#">
-                                    {{ __('Profile edit') }}
+                                <a class="dropdown-item" href="{{route('dashboard')}}">
+                                    لوحة التحكم
                                 </a>
 
                             </div>
@@ -63,7 +63,7 @@
         </div>
     </nav>
 
-    <main class="py-4">
+    <main class="py-4" style="direction:rtl">
         @yield('content')
     </main>
 </div>

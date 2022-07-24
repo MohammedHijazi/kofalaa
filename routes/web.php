@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BeneficiariesController;
+use App\Http\Controllers\FamilyMembersController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SponsorsController;
@@ -23,6 +25,8 @@ Route::get('/', [AdminController::class,'home'])->name('home')->middleware('auth
 Route::resource('sponsors', 'SponsorsController')->middleware('auth');
 Route::get('sponsors/{id}/profile', [SponsorsController::class,'profile'])->middleware('auth')->name('sponsors.profile');
 
+Route::resource('beneficiaries', 'BeneficiariesController')->middleware('auth');
+Route::post('beneficiaries/{id}/add_family_member', [FamilyMembersController::class,'store'])->middleware('auth')->name('beneficiaries.add_family_member');
 
 Route::get('search', [SearchController::class,'index'])->middleware('auth')->name('search.index');
 Route::get('search/results', [SearchController::class,'search'])->middleware('auth')->name('search.results');
