@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Beneficiary;
 use App\Models\FamilyMember;
+use App\Models\Governorate;
 use Illuminate\Http\Request;
 
 class BeneficiariesController extends Controller
@@ -36,9 +37,11 @@ class BeneficiariesController extends Controller
 
     public function show($id)
     {
+        $gevernorates = Governorate::all();
+
         $beneficiary = Beneficiary::findOrFail($id);
 
-        return view('benf.show',['beneficiary'=>$beneficiary]);
+        return view('benf.show',['beneficiary'=>$beneficiary,'gevernorates'=>$gevernorates]);
     }
 
 

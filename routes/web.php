@@ -32,6 +32,7 @@ Route::get('beneficiaries/family_members/{id}', [FamilyMembersController::class,
 Route::post('beneficiaries/family_members/{id}', [FamilyMembersController::class,'update'])->middleware('auth')->name('beneficiaries.family_members.update');
 Route::get('beneficiaries/family_members/{id}/destroy', [FamilyMembersController::class,'destroy'])->middleware('auth')->name('beneficiaries.family_members.destroy');
 
+Route::resource('parents', 'BirthParentsController')->middleware('auth');
 
 Route::get('search', [SearchController::class,'index'])->middleware('auth')->name('search.index');
 Route::get('search/results', [SearchController::class,'search'])->middleware('auth')->name('search.results');
