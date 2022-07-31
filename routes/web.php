@@ -3,7 +3,6 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BeneficiariesController;
 use App\Http\Controllers\FamilyMembersController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SponsorsController;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +32,8 @@ Route::post('beneficiaries/family_members/{id}', [FamilyMembersController::class
 Route::get('beneficiaries/family_members/{id}/destroy', [FamilyMembersController::class,'destroy'])->middleware('auth')->name('beneficiaries.family_members.destroy');
 
 Route::resource('parents', 'BirthParentsController')->middleware('auth');
+
+Route::resource('guardians', 'GuardiansController')->middleware('auth');
 
 Route::get('search', [SearchController::class,'index'])->middleware('auth')->name('search.index');
 Route::get('search/results', [SearchController::class,'search'])->middleware('auth')->name('search.results');

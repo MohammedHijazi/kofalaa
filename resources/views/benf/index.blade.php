@@ -31,7 +31,7 @@
 
                             <td>{{$beneficiary->type}}</td>
 
-                            <td>#</td>
+                            <td>{{$beneficiary->familyMembers->count()}}</td>
 
                             <td style="display: flex; flex-direction: row; justify-content: space-evenly">
                                 <a href="{{route('beneficiaries.show',$beneficiary->id)}}" class="btn btn-primary" style="margin-left: 5px">عرض</a>
