@@ -40,7 +40,8 @@ Route::post('beneficiaries/status',[StatusController::class,'storeEconomical'])-
 Route::post('beneficiaries/housing',[StatusController::class,'storeHousing'])->middleware('auth')->name('beneficiaries.housing.store');
 Route::get('beneficiaries/housing/{id}',[StatusController::class,'editHousing'])->middleware('auth')->name('beneficiaries.editHousing');
 Route::put('beneficiaries/housing/{id}',[StatusController::class,'updateHousing'])->middleware('auth')->name('beneficiaries.updateHousing');
-
+Route::get('beneficiaries/economical/{id}',[StatusController::class,'editEconomical'])->middleware('auth')->name('beneficiaries.editEconomical');
+Route::put('beneficiaries/economical/{id}',[StatusController::class,'updateEconomical'])->middleware('auth')->name('beneficiaries.updateEconomical');
 
 
 Route::get('search', [SearchController::class,'index'])->middleware('auth')->name('search.index');

@@ -50,6 +50,31 @@ class StatusController extends Controller
         return redirect()->route('beneficiaries.show', $request->beneficiary_id);
     }
 
+    public function editEconomical($id){
+        $economic = Beneficiary::findOrFail($id)->economicSituation;
+        return view('benf.editEconomic', compact('economic'));
+    }
+
+    public function updateEconomical(Request $request,$id){
+        $request->validate([
+            'average_income' => 'required|string|max:255',
+            'source_of_income' => 'required|string|max:255',
+            'receive_help' => 'required|in:yes,no',
+            'help_amount' => 'required_if:receive_help,yes|string|max:255',
+            'help_source' => 'required_if:receive_help,yes|string|max:255',
+            'assets' => 'string|max:255|min:3',
+            'assets_profits' => 'string|max:255',
+            'total_income' => 'string|max:255',
+            'description' => 'string|max:255',
+        ]);
+        $economic = EconomicSituation::findOrFail($id);
+        $economic->update($request->all());
+        $beneficiary_id = $economic->beneficiary_id;
+        return redirect()->route('beneficiaries.show', $beneficiary_id);
+    }
+
+
+
     public function editHousing($id){
         $housing = Beneficiary::findOrFail($id)->housingCondition;
         return view('benf.editHousingCondition', compact('housing'));
