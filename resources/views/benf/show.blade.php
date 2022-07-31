@@ -144,8 +144,7 @@
                                         <td>{{$parent->full_name}}</td>
                                         <td>{{$parent->id_number}}</td>
                                         <td style="width: 220px">
-                                            <a href="#" class="btn btn-primary" >عرض</a>
-                                            <a href="{{route('parents.edit',$parent->id)}}" class="btn btn-primary">تعديل</a>
+                                            <a href="{{route('parents.edit',$parent->id)}}" class="btn btn-primary">عرض وتعديل</a>
                                             <a href="{{route('parents.destroy',$parent->id)}}" class="btn btn-danger">حدف</a>
                                         </td>
                                     </tr>
@@ -207,9 +206,8 @@
                                         <td>{{$guardian->id_number}}</td>
                                         <td>{{$guardian->relation}}</td>
                                         <td style="width: 220px">
-                                            <a href="#" class="btn btn-primary" >عرض</a>
-                                            <a href="#" class="btn btn-primary">تعديل</a>
-                                            <a href="#" class="btn btn-danger">حدف</a>
+                                            <a href="{{route('guardians.edit',$guardian->id)}}" class="btn btn-primary"> عرض وتعديل</a>
+                                            <a href="{{route('guardians.destroy',$guardian->id)}}" class="btn btn-danger">حدف</a>
                                         </td>
                                     </tr>
                                 @endforeach
