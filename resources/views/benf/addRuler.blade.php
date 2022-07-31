@@ -1,5 +1,5 @@
 <div class="modal fade" id="addRuler" tabindex="-1" role="dialog"  aria-hidden="true">
-    <form action="#" method="post">
+    <form action="{{route('guardians.store')}}" method="post">
         @csrf
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">

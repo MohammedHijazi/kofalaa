@@ -32,11 +32,11 @@ class GuardiansController extends Controller
             'guardiation_data' => 'nullable|date',
             'issue_place' => 'required|string|max:255',
             'governorate' => 'required',
-            'city' => 'required',
-            'street' => 'required',
+            'city' => 'nullable',
+            'street' => 'nullable',
             'address' => 'nullable|string|max:255',
         ]);
-        
+
         $guardian = Guardian::create($request->all());
         return redirect()->route('beneficiaries.show', $request->beneficiary_id)->with('success', 'تم إضافة ,لي أمر بنجاح');
 

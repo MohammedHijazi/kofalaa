@@ -5,6 +5,7 @@ use App\Http\Controllers\BeneficiariesController;
 use App\Http\Controllers\FamilyMembersController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SponsorsController;
+use App\Http\Controllers\StatusController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,6 +35,10 @@ Route::get('beneficiaries/family_members/{id}/destroy', [FamilyMembersController
 Route::resource('parents', 'BirthParentsController')->middleware('auth');
 
 Route::resource('guardians', 'GuardiansController')->middleware('auth');
+
+Route::post('beneficiaries/status',[StatusController::class,'storeEconomical'])->middleware('auth')->name('beneficiaries.economical.status.store');
+Route::post('beneficiaries/housing',[StatusController::class,'storeHousing'])->middleware('auth')->name('beneficiaries.housing.store');
+
 
 Route::get('search', [SearchController::class,'index'])->middleware('auth')->name('search.index');
 Route::get('search/results', [SearchController::class,'search'])->middleware('auth')->name('search.results');
