@@ -156,6 +156,8 @@
     $('#gov').change(function () {
         $('#cit').children().remove()
         $('#cit').append(new Option('...', '...'))
+        $('#str').children().remove()
+        $('#str').append(new Option('...', '...'))
 
         var gov = $('#gov').val();
         $.ajax({

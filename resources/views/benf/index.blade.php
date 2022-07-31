@@ -8,7 +8,7 @@
     <div class="card ma">
         <div class="card-header" style=" display: flex; justify-content: space-between; align-content: center; align-items: center; ">ادارة المستفيدين
 
-            <a class="btn btn-primary" href="#" role="button">بحث عن مستفيد</a>
+            <a class="btn btn-primary" href="{{route('search.beneficiaries')}}" role="button">بحث عن مستفيد</a>
 
             <a class="btn btn-primary"  role="button" data-toggle="modal" data-target="#addBeneficiary">اضافة مستفيد</a>
             @include('benf.createBeneficiary')

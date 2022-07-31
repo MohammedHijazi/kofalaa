@@ -35,8 +35,8 @@
                 <td colspan="1">
                     <select  id="" name="gevernorate">
                         <option value="{{null}}">...</option>
-                        @foreach($gevernorates as $gevernorate)
-                            <option value="{{$gevernorate->name}}">{{$gevernorate->name}}</option>
+                        @foreach($governorates as $governorate)
+                            <option value="{{$governorate->name}}">{{$governorate->name}}</option>
                         @endforeach
                     </select>
                 </td>

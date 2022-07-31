@@ -15,11 +15,11 @@ class SearchController extends Controller
     public function index()
     {
         $countries = Country::all();
-        $gevernorates = Governorate::all();
+        $governorates = Governorate::all();
         $cities = City::all();
         return view('search.index',[
             'countries' => $countries,
-            'gevernorates' => $gevernorates,
+            'governorates' => $governorates,
             'cities' => $cities
         ]);
     }
@@ -82,8 +82,13 @@ class SearchController extends Controller
             $sponsors = $sponsors->get();
             return view('search.result',['sponsors'=>$sponsors]);
         }
+    }
 
+    public function searchBeneficiariesIndex(){
+        $countries = Country::all();
+        $governorates = Governorate::all();
+        $cities = City::all();
 
-
+        return view('search.benf.search',['governorates'=>$governorates,'cities'=>$cities,'countries'=>$countries]);
     }
 }
