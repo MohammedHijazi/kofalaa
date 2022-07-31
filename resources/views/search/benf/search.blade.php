@@ -56,16 +56,27 @@
             <table width="450" height="250">
                 <tr>
                     <td>اسم الفرد</td>
-                    <td colspan="3"><input type="text" name="beneficiary_id" /></td>
+                    <td colspan="3"><input type="text" name="full_name" /></td>
                     <td></td>
                 </tr>
 
                 <tr>
                     <td>رقم الهوية</td>
-                    <td colspan="3"><input type="text" name="beneficiary_id" /></td>
+                    <td colspan="3"><input type="text" name="id_number" /></td>
                     <td></td>
                 </tr>
 
+                <tr>
+                    <td>تاريخ الميلاد</td>
+                    <td><input type="date" name="birth_date" /></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>الجنس</td>
+                    <td colspan="3"><input type="radio" name="gender" value="male"/>ذكر <input type="radio" name="gender" value="female"/>أنثى</td>
+                    <td></td>
+                </tr>
             </table>
             <button type="submit" style="
         width: 200px;
@@ -75,6 +86,112 @@
       ">بحث</button>
         </form>
 
+        <form action="{{route('search.results')}}" method="get" id="guardian-form">
+            <table width="450" height="250">
+                <tr>
+                    <td>اسم الوصي</td>
+                    <td colspan="3"><input type="text" name="full_name" /></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>رقم الهوية</td>
+                    <td colspan="3"><input type="text" name="id_number" /></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>صلة القرابة</td>
+                    <td colspan="3"><input type="text" name="relation" /></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>تاريخ الوصاية</td>
+                    <td><input type="date" name="guardiation_date" /></td>
+                </tr>
+
+                <tr>
+                    <td>الجهة المانحة للوصاية</td>
+                    <td colspan="3"><input type="text" name="issue_place" /></td>
+                    <td></td>
+                </tr>
+            </table>
+            <button type="submit" style="
+        width: 200px;
+        height: 30px;
+        font-size: 20px;
+        margin: 15px 400px 15px 0px;
+      ">بحث</button>
+        </form>
+
+        <form action="{{route('search.results')}}" method="get" id="custodian-form">
+            <table width="450" height="250">
+                <tr>
+                    <td>اسم الحاضن</td>
+                    <td colspan="3"><input type="text" name="full_name" /></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>رقم الهوية</td>
+                    <td colspan="3"><input type="text" name="id_number" /></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>صلة القرابة</td>
+                    <td colspan="3"><input type="text" name="relation" /></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>مكان اصدار الحضانة</td>
+                    <td colspan="3"><input type="text" name="issue_place" /></td>
+                    <td></td>
+                </tr>
+            </table>
+            <button type="submit" style="
+        width: 200px;
+        height: 30px;
+        font-size: 20px;
+        margin: 15px 400px 15px 0px;
+      ">بحث</button>
+        </form>
+
+        <form action="{{route('search.results')}}" method="get" id="ruler-form">
+            <table width="450" height="250">
+                <tr>
+                    <td>اسم الولي</td>
+                    <td colspan="3"><input type="text" name="full_name" /></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>رقم الهوية</td>
+                    <td colspan="3"><input type="text" name="id_number" /></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>صلة القرابة</td>
+                    <td colspan="3"><input type="text" name="relation" /></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td>مكان اصدار الولاية</td>
+                    <td colspan="3"><input type="text" name="issue_place" /></td>
+                    <td></td>
+                </tr>
+            </table>
+            <button type="submit" style="
+        width: 200px;
+        height: 30px;
+        font-size: 20px;
+        margin: 15px 400px 15px 0px;
+      ">بحث</button>
+        </form>
 
     </fieldset>
 
@@ -88,9 +205,33 @@
             if ($('#family-rad').is(':checked')) {
                 $('#family-form').css('display', 'block');
                 $('#member-form').css('display', 'none');
+                $('#guardian-form').css('display', 'none');
+                $('#custodian-form').css('display', 'none');
+                $('#ruler-form').css('display', 'none');
             }else if($('#member-rad').is(':checked')) {
                 $('#family-form').css('display', 'none');
                 $('#member-form').css('display', 'block');
+                $('#guardian-form').css('display', 'none');
+                $('#custodian-form').css('display', 'none');
+                $('#ruler-form').css('display', 'none');
+            }else if($('#guardian-rad').is(':checked')) {
+                $('#family-form').css('display', 'none');
+                $('#member-form').css('display', 'none');
+                $('#guardian-form').css('display', 'block');
+                $('#custodian-form').css('display', 'none');
+                $('#ruler-form').css('display', 'none');
+            }else if($('#custodian-rad').is(':checked')) {
+                $('#family-form').css('display', 'none');
+                $('#member-form').css('display', 'none');
+                $('#guardian-form').css('display', 'none');
+                $('#custodian-form').css('display', 'block');
+                $('#ruler-form').css('display', 'none');
+            }else{
+                $('#family-form').css('display', 'none');
+                $('#member-form').css('display', 'none');
+                $('#guardian-form').css('display', 'none');
+                $('#custodian-form').css('display', 'none');
+                $('#ruler-form').css('display', 'block');
             }
         });
     </script>
