@@ -19,7 +19,7 @@
                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addHousing">اضافة وصف لحالة المسكن</button>
                 </div>
             @else
-                <a style="margin-right: 20px" href="#" class="btn btn-primary"> تعديل حالة السكن</a>
+                <a style="margin-right: 20px" href="{{route('beneficiaries.editHousing',$beneficiary->id)}}" class="btn btn-primary"> تعديل حالة السكن</a>
             @endif
         </nav>
         @extends('benf.addEconomicalSituation')
@@ -36,16 +36,16 @@
                             <p class="card-text">هل تتلقى الأسرة مساعدة: <span class="fw-bolder">@if($beneficiary->economicSituation->receive_help=='yes') نعم@else  لا@endif  </span>
                             <p class="card-text">قيمة المساعدات: <span class="fw-bolder">{{$beneficiary->economicSituation->help_amount}}</span>
                             <p class="card-text">مصدر كفالات الأيتام: <span class="fw-bolder">{{$beneficiary->economicSituation->help_source}}</span></p>
-
-                            </p>
                         </div>
+
                         <div class="col-md-4">
-                            <p class="card-text">بريد الإلكتروني: <span class="fw-bolder">#</span></p>
-                            <p class="card-text">الحالة الإجتماعية: <span
-                                    class="fw-bolder">#</span></p>
-                            <p class="card-text">المؤهل العلمي: <span
-                                    class="fw-bolder">#</span>
-                            </p>
+                            <p class="card-text">خاصية السكن: <span class="fw-bolder">{{$beneficiary->housingCondition->housing_type}}</span></p>
+                            <p class="card-text">عدد الغرف: <span class="fw-bolder">{{$beneficiary->housingCondition->number_of_rooms}}</span></p>
+                            <p class="card-text">عدد الأفراد في الغرفة: <span class="fw-bolder">{{$beneficiary->housingCondition->people_per_room}}</span></p>
+                            <p class="card-text">حالة البناء: <span class="fw-bolder">{{$beneficiary->housingCondition->building_condition}}</span></p>
+                            <p class="card-text">نوع البناء: <span class="fw-bolder">{{$beneficiary->housingCondition->building_type}}</span></p>
+                            <p class="card-text">مساحة البناء: <span class="fw-bolder">{{$beneficiary->housingCondition->building_space}}</span></p>
+                            <p class="card-text">حالة الأثاث: <span class="fw-bolder">{{$beneficiary->housingCondition->furniture_condition}}</span></p>
                         </div>
 
                     </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Beneficiary;
 use App\Models\EconomicSituation;
 use App\Models\HousingCondition;
 use Illuminate\Http\Request;
@@ -47,5 +48,28 @@ class StatusController extends Controller
         HousingCondition::create($request->all());
 
         return redirect()->route('beneficiaries.show', $request->beneficiary_id);
+    }
+
+    public function editHousing($id){
+        $housing = Beneficiary::findOrFail($id)->housingCondition;
+        return view('benf.editHousingCondition', compact('housing'));
+    }
+
+    public function updateHousing(Request $request,$id){
+        $request->validate([
+            'housing_type' => 'required|in:own,rented,other',
+            'rent_amount' => 'required_if:housing_type,rented|string|max:255',
+            'number_of_rooms' => 'integer|required',
+            'people_per_room' => 'integer|required',
+            'building_condition' => 'string|max:255',
+            'building_type' => 'string|max:255',
+            'building_space' => 'string|max:255',
+            'furniture_condition' => 'string|max:255',
+            'description' => 'string|max:500',
+        ]);
+        $housing = HousingCondition::findOrFail($id);
+        $housing->update($request->all());
+        $beneficiary_id = $housing->beneficiary_id;
+        return redirect()->route('beneficiaries.show', $beneficiary_id);
     }
 }
