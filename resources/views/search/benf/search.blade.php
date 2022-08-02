@@ -30,7 +30,8 @@
         <input type="radio" name="rad" id="ruler-rad" />
 
 
-        <form action="{{route('search.results')}}" method="get" id="family-form">
+        <form action="{{route('search.beneficiaries.results')}}" method="get" id="family-form">
+            <input type="hidden" name="type" value="family">
             <table width="450" height="250">
                 <tr>
                     <td>رقم المستفيد</td>
@@ -53,6 +54,8 @@
         </form>
 
         <form action="{{route('search.results')}}" method="get" id="member-form">
+            <input type="hidden" name="type" value="member">
+
             <table width="450" height="250">
                 <tr>
                     <td>اسم الفرد</td>
@@ -87,6 +90,8 @@
         </form>
 
         <form action="{{route('search.results')}}" method="get" id="guardian-form">
+            <input type="hidden" name="type" value="guardian">
+
             <table width="450" height="250">
                 <tr>
                     <td>اسم الوصي</td>
@@ -126,6 +131,8 @@
         </form>
 
         <form action="{{route('search.results')}}" method="get" id="custodian-form">
+            <input type="hidden" name="type" value="custodian">
+
             <table width="450" height="250">
                 <tr>
                     <td>اسم الحاضن</td>
@@ -160,6 +167,8 @@
         </form>
 
         <form action="{{route('search.results')}}" method="get" id="ruler-form">
+            <input type="hidden" name="type" value="ruler">
+
             <table width="450" height="250">
                 <tr>
                     <td>اسم الولي</td>
@@ -196,7 +205,7 @@
     </fieldset>
 
 
-    <a href="{{route('sponsors.index')}}" style="font-size: 22px; margin: 0px 500px 0px;">رجوع</a>
+    <a href="{{route('beneficiaries.index')}}" style="font-size: 22px; margin: 0px 500px 0px;">رجوع</a>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 

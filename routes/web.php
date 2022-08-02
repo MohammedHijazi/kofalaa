@@ -47,7 +47,7 @@ Route::put('beneficiaries/economical/{id}',[StatusController::class,'updateEcono
 Route::get('search', [SearchController::class,'index'])->middleware('auth')->name('search.index');
 Route::get('search/results', [SearchController::class,'search'])->middleware('auth')->name('search.results');
 Route::get('search/beneficiaries', [SearchController::class,'searchBeneficiariesIndex'])->middleware('auth')->name('search.beneficiaries');
-
+Route::get('search/beneficiaries/results', [SearchController::class,'searchBeneficiaries'])->middleware('auth')->name('search.beneficiaries.results');
 
 
 

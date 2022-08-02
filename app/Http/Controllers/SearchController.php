@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Beneficiary;
 use App\Models\City;
 use App\Models\Country;
+use App\Models\FamilyMember;
 use App\Models\Governorate;
 use App\Models\InstitutionSponsor;
 use App\Models\PersonalSponsor;
@@ -90,5 +92,35 @@ class SearchController extends Controller
         $cities = City::all();
 
         return view('search.benf.search',['governorates'=>$governorates,'cities'=>$cities,'countries'=>$countries]);
+    }
+
+
+    public function searchBeneficiaries(){
+        $request = request()->all();
+        $type=$request['type'];
+
+        $beneficiary_id=$request['beneficiary_id'];
+        $creation_date_from=$request['creation_date_from'];
+        $creation_date_to=$request['creation_date_to'];
+
+        if ($type == 'family') {
+            $beneficiaries = new FamilyMember();
+            if($beneficiary_id){
+                $beneficiaries = $beneficiaries->whereHas('beneficiary',function($q)use($beneficiary_id){
+                    $q->where('beneficiary_id','=',$beneficiary_id);
+                });
+            }elseif($creation_date_from){
+                $beneficiaries = $beneficiaries->whereHas('beneficiary',function($q)use($creation_date_from){
+                    $q->where('created_at','>=',$creation_date_from);
+                });
+            }elseif ($creation_date_to) {
+                $beneficiaries = $beneficiaries->whereHas('beneficiary',function($q)use($creation_date_to){
+                    $q->where('created_at','<=',$creation_date_to);
+                });
+            }
+
+            $beneficiaries = $beneficiaries->get();
+            return view('search.benf.result',['beneficiaries'=>$beneficiaries]);
+        }
     }
 }
