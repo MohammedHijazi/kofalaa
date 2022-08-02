@@ -7,6 +7,7 @@ use App\Models\City;
 use App\Models\Country;
 use App\Models\FamilyMember;
 use App\Models\Governorate;
+use App\Models\Guardian;
 use App\Models\InstitutionSponsor;
 use App\Models\PersonalSponsor;
 use App\Models\Sponsor;
@@ -99,11 +100,11 @@ class SearchController extends Controller
         $request = request()->all();
         $type=$request['type'];
 
-        $beneficiary_id=$request['beneficiary_id'];
-        $creation_date_from=$request['creation_date_from'];
-        $creation_date_to=$request['creation_date_to'];
 
         if ($type == 'family') {
+            $beneficiary_id=$request['beneficiary_id'];
+            $creation_date_from=$request['creation_date_from'];
+            $creation_date_to=$request['creation_date_to'];
             $beneficiaries = new FamilyMember();
             if($beneficiary_id){
                 $beneficiaries = $beneficiaries->whereHas('beneficiary',function($q)use($beneficiary_id){
@@ -120,6 +121,65 @@ class SearchController extends Controller
             }
 
             $beneficiaries = $beneficiaries->get();
+            return view('search.benf.result',['beneficiaries'=>$beneficiaries]);
+        }elseif ($type == 'member'){
+            $full_name=$request['full_name'];
+            $id_number=$request['id_number'];
+            $birth_date=$request['birth_date'];
+            $gender=$request['gender'];
+
+            $beneficiaries = new FamilyMember();
+            if($full_name){
+                $beneficiaries = $beneficiaries->where('name','like','%'.$full_name.'%');
+            }elseif ($id_number) {
+                $beneficiaries = $beneficiaries->where('id_number', '=', $id_number);
+            }elseif ($birth_date) {
+                $beneficiaries = $beneficiaries->where('birth_date', '=', $birth_date);
+            }elseif ($gender){
+                $beneficiaries = $beneficiaries->where('gender','=',$gender);
+            }
+            $beneficiaries = $beneficiaries->get();
+            return view('search.benf.result',['beneficiaries'=>$beneficiaries]);
+        }elseif($type == 'guardian'){
+            $full_name=$request['full_name'];
+            $id_number=$request['id_number'];
+            $relation=$request['relation'];
+            $guardiation_date=$request['guardiation_date'];
+            $issue_place=$request['issue_place'];
+
+            $beneficiaries = new Beneficiary();
+
+            if($full_name) {
+                $beneficiaries = $beneficiaries->whereHas('guardians', function ($q) use ($full_name) {
+                    $q->where('full_name', 'like', '%' . $full_name . '%');
+                });
+                $beneficiaries = $beneficiaries->with('familyMembers')->get();
+                $beneficiaries = $beneficiaries[0]->familyMembers;
+            }elseif ($id_number) {
+                $beneficiaries = $beneficiaries->whereHas('guardians', function ($q) use ($id_number) {
+                    $q->where('id_number', '=', $id_number);
+                });
+                $beneficiaries = $beneficiaries->with('familyMembers')->get();
+                $beneficiaries = $beneficiaries[0]->familyMembers;
+            }elseif ($relation) {
+                $beneficiaries = $beneficiaries->whereHas('guardians', function ($q) use ($relation) {
+                    $q->where('relation', '=', $relation);
+                });
+                $beneficiaries = $beneficiaries->with('familyMembers')->get();
+                $beneficiaries = $beneficiaries[0]->familyMembers;
+            }elseif ($guardiation_date) {
+                $beneficiaries = $beneficiaries->whereHas('guardians', function ($q) use ($guardiation_date) {
+                    $q->where('guardiation_date', '=', $guardiation_date);
+                });
+                $beneficiaries = $beneficiaries->with('familyMembers')->get();
+                $beneficiaries = $beneficiaries[0]->familyMembers;
+            }elseif ($issue_place) {
+                $beneficiaries = $beneficiaries->whereHas('guardians', function ($q) use ($issue_place) {
+                    $q->where('issue_place', '=', $issue_place);
+                });
+                $beneficiaries = $beneficiaries->with('familyMembers')->get();
+                $beneficiaries = $beneficiaries[0]->familyMembers;
+            }
             return view('search.benf.result',['beneficiaries'=>$beneficiaries]);
         }
     }

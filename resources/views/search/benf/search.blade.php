@@ -53,7 +53,7 @@
       ">بحث</button>
         </form>
 
-        <form action="{{route('search.results')}}" method="get" id="member-form">
+        <form action="{{route('search.beneficiaries.results')}}" method="get" id="member-form">
             <input type="hidden" name="type" value="member">
 
             <table width="450" height="250">
@@ -77,7 +77,7 @@
 
                 <tr>
                     <td>الجنس</td>
-                    <td colspan="3"><input type="radio" name="gender" value="male"/>ذكر <input type="radio" name="gender" value="female"/>أنثى</td>
+                    <td colspan="3"><input checked type="radio" name="gender" value="male"/>ذكر <input type="radio" name="gender" value="female"/>أنثى</td>
                     <td></td>
                 </tr>
             </table>
@@ -89,7 +89,7 @@
       ">بحث</button>
         </form>
 
-        <form action="{{route('search.results')}}" method="get" id="guardian-form">
+        <form action="{{route('search.beneficiaries.results')}}" method="get" id="guardian-form">
             <input type="hidden" name="type" value="guardian">
 
             <table width="450" height="250">
