@@ -140,6 +140,7 @@ class SearchController extends Controller
             }
             $beneficiaries = $beneficiaries->get();
             return view('search.benf.result',['beneficiaries'=>$beneficiaries]);
+
         }elseif($type == 'guardian'){
             $full_name=$request['full_name'];
             $id_number=$request['id_number'];
@@ -147,39 +148,40 @@ class SearchController extends Controller
             $guardiation_date=$request['guardiation_date'];
             $issue_place=$request['issue_place'];
 
-            $beneficiaries = new Beneficiary();
+            $beneficiaries = new FamilyMember();
 
             if($full_name) {
-                $beneficiaries = $beneficiaries->whereHas('guardians', function ($q) use ($full_name) {
-                    $q->where('full_name', 'like', '%' . $full_name . '%');
+                $beneficiaries = $beneficiaries->whereHas('beneficiary.guardians', function ($q) use ($full_name) {
+                    $q->where('full_name', 'like', '%' . $full_name . '%')->where('type', '=', 'وصي');
                 });
-                $beneficiaries = $beneficiaries->with('familyMembers')->get();
-                $beneficiaries = $beneficiaries[0]->familyMembers;
+                $beneficiaries = $beneficiaries->get();
+
             }elseif ($id_number) {
-                $beneficiaries = $beneficiaries->whereHas('guardians', function ($q) use ($id_number) {
-                    $q->where('id_number', '=', $id_number);
+                $beneficiaries = $beneficiaries->whereHas('beneficiary.guardians', function ($q) use ($id_number) {
+                    $q->where('id_number', '=', $id_number)->where('type', '=', 'وصي');
                 });
-                $beneficiaries = $beneficiaries->with('familyMembers')->get();
-                $beneficiaries = $beneficiaries[0]->familyMembers;
+
+                $beneficiaries = $beneficiaries->get();
+
             }elseif ($relation) {
-                $beneficiaries = $beneficiaries->whereHas('guardians', function ($q) use ($relation) {
-                    $q->where('relation', '=', $relation);
+                $beneficiaries = $beneficiaries->whereHas('beneficiary.guardians', function ($q) use ($relation) {
+                    $q->where('relation', '=', $relation)->where('type', '=', 'وصي');
                 });
-                $beneficiaries = $beneficiaries->with('familyMembers')->get();
-                $beneficiaries = $beneficiaries[0]->familyMembers;
+                $beneficiaries = $beneficiaries->get();
+
             }elseif ($guardiation_date) {
-                $beneficiaries = $beneficiaries->whereHas('guardians', function ($q) use ($guardiation_date) {
-                    $q->where('guardiation_date', '=', $guardiation_date);
+                $beneficiaries = $beneficiaries->whereHas('beneficiary.guardians', function ($q) use ($guardiation_date) {
+                    $q->where('guardiation_data', '=', $guardiation_date)->where('type', '=', 'وصي');
                 });
-                $beneficiaries = $beneficiaries->with('familyMembers')->get();
-                $beneficiaries = $beneficiaries[0]->familyMembers;
+                $beneficiaries = $beneficiaries->get();
             }elseif ($issue_place) {
-                $beneficiaries = $beneficiaries->whereHas('guardians', function ($q) use ($issue_place) {
-                    $q->where('issue_place', '=', $issue_place);
+                $beneficiaries = $beneficiaries->whereHas('beneficiary.guardians', function ($q) use ($issue_place) {
+                    $q->where('issue_place', '=', $issue_place)->where('type', '=', 'وصي');
                 });
-                $beneficiaries = $beneficiaries->with('familyMembers')->get();
-                $beneficiaries = $beneficiaries[0]->familyMembers;
+                $beneficiaries = $beneficiaries->get();
+
             }
+
             return view('search.benf.result',['beneficiaries'=>$beneficiaries]);
         }
     }
