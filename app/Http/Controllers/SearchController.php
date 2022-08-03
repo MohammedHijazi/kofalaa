@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
+    //search page for sponsors
     public function index()
     {
         $countries = Country::all();
@@ -26,7 +27,9 @@ class SearchController extends Controller
             'cities' => $cities
         ]);
     }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    //results page for sponsors
     public function search(Request $request){
         $request = $request->all();
 
@@ -86,7 +89,10 @@ class SearchController extends Controller
             return view('search.result',['sponsors'=>$sponsors]);
         }
     }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+    //search page for beneficiaries
     public function searchBeneficiariesIndex(){
         $countries = Country::all();
         $governorates = Governorate::all();
@@ -94,13 +100,16 @@ class SearchController extends Controller
 
         return view('search.benf.search',['governorates'=>$governorates,'cities'=>$cities,'countries'=>$countries]);
     }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+    //results page for beneficiaries
     public function searchBeneficiaries(){
         $request = request()->all();
         $type=$request['type'];
         $beneficiaries = new FamilyMember();
 
+        //search by family
         if ($type == 'family') {
             $beneficiary_id=$request['beneficiary_id'];
             $creation_date_from=$request['creation_date_from'];
@@ -123,6 +132,8 @@ class SearchController extends Controller
             $beneficiaries = $beneficiaries->get();
 
             return view('search.benf.result',['beneficiaries'=>$beneficiaries]);
+
+        //search by family member
         }elseif ($type == 'member'){
             $full_name=$request['full_name'];
             $id_number=$request['id_number'];
@@ -144,6 +155,8 @@ class SearchController extends Controller
 
             return view('search.benf.result',['beneficiaries'=>$beneficiaries]);
 
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //search by guardian
         }elseif($type == 'guardian'){
             $full_name=$request['full_name'];
             $id_number=$request['id_number'];
@@ -183,6 +196,8 @@ class SearchController extends Controller
             $beneficiaries = $beneficiaries->get();
 
             return view('search.benf.result',['beneficiaries'=>$beneficiaries]);
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //search by custodian
         }elseif ($type=='custodian'){
             $full_name=$request['full_name'];
             $id_number=$request['id_number'];
@@ -218,6 +233,8 @@ class SearchController extends Controller
 
             return view('search.benf.result',['beneficiaries'=>$beneficiaries]);
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// search by ruler
         }elseif ($type == 'ruler'){
             $full_name=$request['full_name'];
             $id_number=$request['id_number'];
