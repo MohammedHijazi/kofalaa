@@ -17,7 +17,6 @@
         <th>عمليات</th>
 
 
-
         @foreach($beneficiaries as $beneficiary)
             <tr>
                 <td>{{$beneficiary->beneficiary_id}}</td>
@@ -25,8 +24,8 @@
                 <td>{{$beneficiary->id_number}}</td>
                 <td>{{$beneficiary->health_status}}</td>
                 <td>
-                    <button>ادارة</button
-                    ><button style="background-color: gold; width: 120px">
+                    <a href="{{route('beneficiaries.show',$beneficiary->beneficiary_id)}}">ادارة</a>
+                    <button style="background-color: gold; width: 120px">
                         Send SMS
                     </button>
                 </td>
