@@ -2,7 +2,6 @@
 
 @section('styles')
     <link rel="stylesheet" href="{{asset('assets/main/css/index.style.css')}}">
-
 @endsection
 
 @section('content')
@@ -56,6 +55,7 @@
 
                         <td>#</td>
                         <td style="display: flex; flex-direction: row; justify-content: space-between">
+                            <a href="{{route('sponsors.beneficiaries',$sponsor->id)}}" class="btn btn-primary" style="margin-left: 5px">ادارة المستفيدين</a>
                             <a href="{{route('sponsors.profile',$sponsor->id)}}" class="btn btn-primary" style="margin-left: 5px">عرض</a>
                             <a href="{{route('sponsors.edit',$sponsor->id)}}" class="btn btn-primary" style="margin-left: 5px">تعديل</a>
                             <form action="{{route('sponsors.destroy',$sponsor->id)}}" method="post">

@@ -21,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/data',[SponsorsController::class,'index'])->name('data');
 
+Route::get('autocomplete/name', [SponsorsController::class,'fetch'])->name('autocomplete.name');

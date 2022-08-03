@@ -19,4 +19,16 @@ class Sponsor extends Model
     {
         return $this->hasOne(InstitutionSponsor::class, 'sponsor_id', 'id');
     }
+
+    //Many to Many Relationship
+    public function beneficiaries(){
+        return $this->belongsToMany(
+          FamilyMember::class,
+            'beneficiary_sponsor',
+            'sponsor_id',
+            'beneficiary_id',
+            'id',
+            'id'
+        )->withPivot('sponsorship_type','created_at','updated_at');
+    }
 }

@@ -34,5 +34,17 @@ class FamilyMember extends Model
         return $this->belongsTo(Beneficiary::class);
     }
 
+    //Many to Many Relationship
+    public function sponsors(){
+        return $this->belongsToMany(
+            Sponsor::class,
+            'beneficiary_sponsor',
+            'beneficiary_id',
+            'sponsor_id',
+            'id',
+            'id'
+        )->withPivot('sponsorship_type','created_at','updated_at');
+    }
+
 
 }

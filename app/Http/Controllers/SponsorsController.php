@@ -308,6 +308,18 @@ class SponsorsController extends Controller
     }
 
 
+    public function beneficiariesIndex($id)
+    {
+        $sponsor = Sponsor::findOrFail($id);
+        $beneficiaries = $sponsor->beneficiaries;
+
+        return view('mgmt.showBeneficiaries',[
+            'sponsor' => $sponsor,
+            'beneficiaries' => $beneficiaries
+        ]);
+    }
+
+
 
 }
 
