@@ -24,9 +24,9 @@
             @method('put')
             <div class="idSection" style="margin-top: 15px">
                 <label for="">بطاقة التعريف</label>
-                <input type="radio" name="id_type" value="id" id="id" @if($sponsor->personalSponsor->id_type == 'id') checked @endif />
+                <input type="radio" name="id_type" value="id" id="id" @if($sponsor->personalSponsor->id_type == 'هوية') checked @endif />
                 <label for="id">هوية</label>
-                <input  type="radio" name="id_type" value="passport" id="passport" @if($sponsor->personalSponsor->id_type == 'passport') checked @endif />
+                <input  type="radio" name="id_type" value="passport" id="passport" @if($sponsor->personalSponsor->id_type == 'جواز سفر') checked @endif />
                 <label for="passport">جواز السفر</label>
 
 

@@ -57,7 +57,12 @@
                         <td>#</td>
                         <td style="display: flex; flex-direction: row; justify-content: space-between">
                             <a href="{{route('sponsors.profile',$sponsor->id)}}" class="btn btn-primary" style="margin-left: 5px">عرض</a>
-                            <a href="{{route('sponsors.edit',$sponsor->id)}}" class="btn btn-primary">تعديل</a>
+                            <a href="{{route('sponsors.edit',$sponsor->id)}}" class="btn btn-primary" style="margin-left: 5px">تعديل</a>
+                            <form action="{{route('sponsors.destroy',$sponsor->id)}}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger" style="margin-left: 5px">حذف</button>
+                            </form>
                         </td>
                     </tr>
                     @endforeach

@@ -102,7 +102,7 @@ class SponsorsController extends Controller
                 ]);
 
                 DB::commit();
-                return redirect()->route('home')->with('success', 'Sponsor created successfully');
+                return redirect()->route('sponsors.index')->with('success', 'Sponsor created successfully');
             }catch (Throwable $e) {
                 DB::rollBack();
                 throw $e;
@@ -148,7 +148,7 @@ class SponsorsController extends Controller
                 ]);
 
                 DB::commit();
-                return redirect()->route('home')->with('success', 'Sponsor created successfully');
+                return redirect()->route('sponsors.index')->with('success', 'Sponsor created successfully');
 
             }catch (Throwable $e) {
                 DB::rollBack();
@@ -247,7 +247,7 @@ class SponsorsController extends Controller
                 $personalSponsor->save();
 
                 DB::commit();
-                return redirect()->route('home')->with('success', 'Sponsor updated successfully');
+                return redirect()->route('sponsors.index')->with('success', 'Sponsor updated successfully');
 
             }catch (Throwable $e) {
                 DB::rollBack();
@@ -290,7 +290,7 @@ class SponsorsController extends Controller
 
 
                 DB::commit();
-                return redirect()->route('home')->with('success', 'Sponsor updated successfully');
+                return redirect()->route('sponsors.index')->with('success', 'Sponsor updated successfully');
 
             }catch (Throwable $e) {
                 DB::rollBack();
@@ -304,7 +304,7 @@ class SponsorsController extends Controller
     {
         $sponsor = Sponsor::findOrFail($id);
         $sponsor->delete();
-        return redirect()->route('home')->with('success', 'Sponsor deleted successfully');
+        return redirect()->route('sponsors.index')->with('success', 'Sponsor deleted successfully');
     }
 
 

@@ -20,7 +20,7 @@
     <form action="{{route('search.results')}}" method="get">
         <legend>البحث عن كفيل</legend>
         <label for="">شخصي</label>
-        <input type="radio" name="type" value="personal"  />
+        <input type="radio" name="type" value="personal" checked  />
         <label for="">مؤسسة</label>
         <input type="radio" name="type" value="institution" />
         <table width="520" height="250">

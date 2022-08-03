@@ -22,6 +22,14 @@ class PersonalSponsor extends Model
         'sponsor_id'
     ];
 
+    public function getIdTypeAttribute($value){
+        if ($value == 'id'){
+            return 'هوية';
+        }else{
+            return 'جواز سفر';
+        }
+    }
+
     public function sponsor(){
         return $this->belongsTo(Sponsor::class);
     }
