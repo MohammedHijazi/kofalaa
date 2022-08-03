@@ -42,6 +42,6 @@
         </tr>
     </table>
 </section>
-<a href="{{route('search.index')}}" style="font-size: 22px; margin: 0px 500px 0px;">رجوع</a>
+<a href="{{route('search.beneficiaries')}}" style="font-size: 22px; margin: 0px 500px 0px;">رجوع</a>
 </body>
 </html>

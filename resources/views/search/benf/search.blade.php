@@ -130,7 +130,7 @@
       ">بحث</button>
         </form>
 
-        <form action="{{route('search.results')}}" method="get" id="custodian-form">
+        <form action="{{route('search.beneficiaries.results')}}" method="get" id="custodian-form">
             <input type="hidden" name="type" value="custodian">
 
             <table width="450" height="250">
@@ -166,7 +166,7 @@
       ">بحث</button>
         </form>
 
-        <form action="{{route('search.results')}}" method="get" id="ruler-form">
+        <form action="{{route('search.beneficiaries.results')}}" method="get" id="ruler-form">
             <input type="hidden" name="type" value="ruler">
 
             <table width="450" height="250">
