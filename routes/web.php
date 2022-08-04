@@ -22,12 +22,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [AdminController::class,'home'])->name('home')->middleware('auth');
 
+//Sponsors routes
 Route::resource('sponsors', 'SponsorsController')->middleware('auth');
 Route::get('sponsors/{id}/profile', [SponsorsController::class,'profile'])->middleware('auth')->name('sponsors.profile');
 Route::get('sponsors/{id}/beneficiaries', [SponsorsController::class,'beneficiariesIndex'])->middleware('auth')->name('sponsors.beneficiaries');
 
 
-
+//Beneficiaries routes
 Route::resource('beneficiaries', 'BeneficiariesController')->middleware('auth');
 Route::post('beneficiaries/{id}/add_family_member', [FamilyMembersController::class,'store'])->middleware('auth')->name('beneficiaries.add_family_member');
 Route::get('beneficiaries/family_members/{id}/show', [FamilyMembersController::class,'show'])->middleware('auth')->name('beneficiaries.family_members.show');
@@ -47,13 +48,14 @@ Route::get('beneficiaries/economical/{id}',[StatusController::class,'editEconomi
 Route::put('beneficiaries/economical/{id}',[StatusController::class,'updateEconomical'])->middleware('auth')->name('beneficiaries.updateEconomical');
 
 
+//searching routes
 Route::get('search', [SearchController::class,'index'])->middleware('auth')->name('search.index');
 Route::get('search/results', [SearchController::class,'search'])->middleware('auth')->name('search.results');
 Route::get('search/beneficiaries', [SearchController::class,'searchBeneficiariesIndex'])->middleware('auth')->name('search.beneficiaries');
 Route::get('search/beneficiaries/results', [SearchController::class,'searchBeneficiaries'])->middleware('auth')->name('search.beneficiaries.results');
 
 
-
+//Admin panel routes
 Route::get('admin',[AdminController::class,'index'])->middleware(['auth'])->name('dashboard');
 Route::get('admin/countries',[AdminController::class,'viewCountries'])->middleware(['auth'])->name('countries.view');
 Route::get('admin/governorates',[AdminController::class,'viewGovernorates'])->middleware(['auth'])->name('governorates.view');

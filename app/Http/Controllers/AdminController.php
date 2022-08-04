@@ -8,6 +8,7 @@ use App\Models\Governorate;
 use App\Models\Street;
 use Illuminate\Http\Request;
 
+//Admin panel Controller
 class AdminController extends Controller
 {
     public function home(){

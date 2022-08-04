@@ -13,18 +13,20 @@ use Illuminate\Support\Facades\Response;
 
 class SponsorsController extends Controller
 {
+    //function to get all governorates and their corresponding cities and streets to be used in dropdown lists
     public function index(){
         $governorates = Governorate::get()->load('cities','cities.streets');
         return Response::json($governorates);
     }
 
+    //function to get family members' names for autocomplete when searching
     public function fetch(Request $request){
         $request = $request->all();
         $name = $request['query'];
-
         $result = FamilyMember::where('name','like','%'.$name.'%')->get();
-
         return Response::json($result);
     }
+
+
 
 }

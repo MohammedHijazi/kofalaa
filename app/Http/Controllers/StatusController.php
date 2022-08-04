@@ -1,5 +1,7 @@
 <?php
 
+//Controller to manage economic situations and Housing conditions of beneficiaries
+
 namespace App\Http\Controllers;
 
 use App\Models\Beneficiary;
