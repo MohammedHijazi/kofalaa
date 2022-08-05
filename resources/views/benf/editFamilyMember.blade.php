@@ -5,13 +5,25 @@
 @endsection
 
 @section('content')
+
         <form action="{{route('beneficiaries.family_members.update',$member->id)}}" method="post" id="addMember_form">
+            <!--show error message from validator -->
+
             @csrf
             <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="addEquipmentLabel">تعديل فرد</h5>
                     </div>
+                    @if(count($errors) > 0)
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                    <li>{{$error}}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
 
                     <div class="modal-body row" >
 

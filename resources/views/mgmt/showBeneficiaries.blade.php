@@ -4,7 +4,21 @@
     </head>
 
     <body>
+    <!-- Simple Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{{route('home')}}">Home Page</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{route('sponsors.index')}}">Sponsors <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
     <div class="card ma" style="width: 80%; margin-right: 10%; margin-top: 3%">
+
         <div class="card-header" style=" display: flex; justify-content: space-between; align-content: center; align-items: center; ">ادارة المستفيدين
             <!--search input-->
             <div class="input-group mb-1" style="width: 500px">
@@ -29,7 +43,7 @@
         <div class="card-body">
             <table id="requests" class="table table-bordered">
                 <thead>
-                <tr>
+                <tr style="text-align: center">
                     <th>#</th>
                     <th>الرقم</th>
                     <th>الاسم</th>
@@ -118,7 +132,7 @@
                             } else {
                                 sponsorship_type = 'سنوي';
                             }
-                            html += '<tr>';
+                            html += '<tr style="text-align: center">';
                             html += '<td>' + (i + 1) + '</td>';
                             html += '<td>' + data[i].id + '</td>';
                             html += '<td>' + data[i].name + '</td>';

@@ -10,6 +10,15 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="addEquipmentLabel">تعديل وصف للحالة الاقتصادية</h5>
                 </div>
+                @if(count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach($errors->all() as $error)
+                                <li>{{$error}}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
                 <div class="modal-body row" >
 

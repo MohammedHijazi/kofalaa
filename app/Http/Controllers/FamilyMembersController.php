@@ -47,7 +47,7 @@ class FamilyMembersController extends Controller
 
         $request->validate([
             'name' => 'required|string|max:255',
-            'id_number' => 'required|string|max:255',
+            'id_number' => 'required|string|max:255|unique:family_members,id_number,' . $id,
             'birth_date' => 'required|date',
             'gender' => 'required',
             'social_status' => 'required',

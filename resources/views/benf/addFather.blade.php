@@ -9,10 +9,17 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+                @if(count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach($errors->all() as $error)
+                                <li>{{$error}}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
                 <div class="modal-body row" >
-
-                    <div class="errMsgContainer mb-3" id="errMsgContainer"></div>
 
                     <input name="beneficiary_id"  type="hidden" value="{{$beneficiary->id}}" class="form-control">
                     <input name="type" type="hidden" value="father">
