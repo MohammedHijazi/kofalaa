@@ -5,7 +5,7 @@
 
     <body>
     <div class="card ma" style="width: 80%; margin-right: 10%; margin-top: 3%">
-        <div class="card-header" style=" display: flex; justify-content: space-between; align-content: center; align-items: center; ">ادرة المستفيدين
+        <div class="card-header" style=" display: flex; justify-content: space-between; align-content: center; align-items: center; ">ادارة المستفيدين
             <!--search input-->
             <div class="input-group mb-1" style="width: 500px">
                 <input id="search-field" type="text" class="form-control typehead" placeholder="بحث عن مستفيد">
@@ -111,12 +111,18 @@
                     success: function (response) {
                         let data = response;
                         let html = '';
+                        let sponsorship_type = '';
                         for (let i = 0; i < data.length; i++) {
+                            if (data[i].pivot.sponsorship_type === 'monthly') {
+                                sponsorship_type = 'شهري';
+                            } else {
+                                sponsorship_type = 'سنوي';
+                            }
                             html += '<tr>';
                             html += '<td>' + (i + 1) + '</td>';
                             html += '<td>' + data[i].id + '</td>';
                             html += '<td>' + data[i].name + '</td>';
-                            html += '<td>' + data[i].pivot.sponsorship_type + '</td>';
+                            html += '<td>' + sponsorship_type + '</td>';
                             html += '<td>' + data[i].created_at + '</td>';
                             html += '<td style="display: flex; flex-direction: row; justify-content: space-evenly">';
                             html += '<button  class="btn btn-primary update" style="height: 40px;">تغيير نوع الكفالة</button>';

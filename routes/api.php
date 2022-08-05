@@ -25,11 +25,14 @@ Route::get('/data',[SponsorsController::class,'index'])->name('data');
 //Route for getting family members' names for autocomplete when searching
 Route::get('autocomplete/name', [SponsorsController::class,'fetch'])->name('autocomplete.name');
 
-
+//Route for adding a beneficiary to a sponsor
 Route::post('add_beneficiary',[SponsorsController::class,'addBeneficiary'])->name('add.beneficiary');
 
+//Route for fetching all beneficiaries of a sponsor
 Route::get('sponsor/{id}/beneficiaries',[SponsorsController::class,'fetchBeneficiaries'])->name('sponsor.beneficiaries');
 
+//Route for deleting a beneficiary from a sponsor
 Route::get('sponsor/{sponsor_id}/beneficiary/{beneficiary_id}',[SponsorsController::class,'destroyBeneficiary'])->name('destroy.beneficiary');
 
+//Route for updating a beneficiary's sponsorship type
 Route::get('update/sponsor/{sponsor_id}/beneficiary/{beneficiary_id}',[SponsorsController::class,'updateBeneficiary'])->name('update.beneficiary');

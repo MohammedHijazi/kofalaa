@@ -46,6 +46,13 @@ class FamilyMember extends Model
         )->withPivot('sponsorship_type','created_at','updated_at');
     }
 
+    //retrieve data from ceated_at column in pivot table
+    public function getCreatedAtAttribute($value){
+        return date('Y-m-d',strtotime($value));
+    }
+
+
+
 
 
 }
