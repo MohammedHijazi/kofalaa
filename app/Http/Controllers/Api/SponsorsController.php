@@ -45,13 +45,28 @@ class SponsorsController extends Controller
         $beneficiary_id=FamilyMember::find($beneficiary_id)->id;
         $sponsor=Sponsor::findOrFail($sponsor_id);
 
-        //check if beneficiary is already sponsored by this sponsor and if so, add new beneficiary without deleting the old one
+        //check if beneficiary is already sponsored
+        $check=$sponsor->beneficiaries->contains($beneficiary_id);
+        if($check){
+            return Response::json(['message'=>'Beneficiary is already sponsored'],400);
+        }
+
+        //add beneficiary to sponsor
         $sponsor->beneficiaries()->attach($beneficiary_id,['sponsorship_type'=>$sponsorship_type]);
 
 
-        return Response::json('Beneficiary added successfully',200);
+        return Response::json(['message' => 'Beneficiary added successfully'],200);
 
     }
+
+    public function destroyBeneficiary($sponsor_id,$beneficiary_id){
+        $sponsor=Sponsor::findOrFail($sponsor_id);
+        $beneficiary=FamilyMember::findOrFail($beneficiary_id);
+        $sponsor->beneficiaries()->detach($beneficiary);
+        return Response::json(['message'=>'Beneficiary removed successfully'],200);
+    }
+
+
 
 
 

@@ -39,21 +39,6 @@
                 </tr>
                 </thead>
                 <tbody id="#requests">
-                <tr>
-                    <td>#</td>
-                    <td>#</td>
-                    <td>#</td>
-                    <td>#</td>
-                    <td>#</td>
-                    <td style="display: flex; flex-direction: row; justify-content: space-evenly">
-                        <a href="#" class="btn btn-primary" style="margin-left: 5px">تعديل</a>
-                        <form action="#" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger" style="margin-left: 5px">حذف</button>
-                        </form>
-                    </td>
-                </tr>
                 </tbody>
             </table>
         </div>
@@ -136,12 +121,9 @@
                             html += '<td>' + data[i].pivot.sponsorship_type + '</td>';
                             html += '<td>' + data[i].created_at + '</td>';
                             html += '<td style="display: flex; flex-direction: row; justify-content: space-evenly">';
-                            html += '<a href="#" class="btn btn-primary">تعديل</a>';
-                            html += '<form action="#" method="post">';
-                            html += '@csrf';
-                            html += '@method("DELETE")';
-                            html += '<button type="submit" class="btn btn-danger" >حذف</button>';
-                            html += '</form>';
+                            html += '<a href="#" class="btn btn-primary" style="height: 40px;">تغيير نوع الكفالة</a>';
+                            html += '<button  class="btn btn-danger destroy" >حذف</button>';
+                            html += '<input type="hidden" class="benef-id" value="' + data[i].id + '">';
                             html += '</td>';
                             html += '</tr>';
                         }
@@ -153,6 +135,29 @@
                     }
                     });
                 }
+
+
+        //script for deleting a beneficiary from the sponsor
+        $(document).on('click', '.destroy', function (e) {
+            e.preventDefault();
+            var id = $(this).parent().find('input.benef-id').val();
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: "http://127.0.0.1:8000/api/sponsor"+'/'+'<?php echo $sponsor->id; ?>'+'/'+'beneficiary'+'/'+id,
+                dataType: "json",
+                success: function (response) {
+                    console.log(response)
+                    fetchBeneficiaries();
+                }
+            });
+        });
     </script>
 
     </body>

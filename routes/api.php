@@ -29,3 +29,5 @@ Route::get('autocomplete/name', [SponsorsController::class,'fetch'])->name('auto
 Route::post('add_beneficiary',[SponsorsController::class,'addBeneficiary'])->name('add.beneficiary');
 
 Route::get('sponsor/{id}/beneficiaries',[SponsorsController::class,'fetchBeneficiaries'])->name('sponsor.beneficiaries');
+
+Route::get('sponsor/{sponsor_id}/beneficiary/{beneficiary_id}',[SponsorsController::class,'destroyBeneficiary'])->name('destroy.beneficiary');
