@@ -28,12 +28,14 @@ class SponsorsController extends Controller
         return Response::json($result);
     }
 
+    //function to fetch all beneficiaries of a sponsor
     public function fetchBeneficiaries($id){
         $beneficiaries = Sponsor::find($id)->beneficiaries;
         return Response::json($beneficiaries,200);
     }
 
 
+    //function to add a beneficiary to a sponsor
     public function addBeneficiary(Request $request){
 
         $request=$request->all();
@@ -51,14 +53,29 @@ class SponsorsController extends Controller
             return Response::json(['message'=>'Beneficiary is already sponsored'],400);
         }
 
-        //add beneficiary to sponsor
+        //add beneficiary to sponsor if not already sponsored
         $sponsor->beneficiaries()->attach($beneficiary_id,['sponsorship_type'=>$sponsorship_type]);
-
 
         return Response::json(['message' => 'Beneficiary added successfully'],200);
 
     }
 
+    //function to update a beneficiary sponsorship_type of a sponsor
+    public function updateBeneficiary($sponsor_id,$beneficiary_id){
+        $sponsor=Sponsor::findOrFail($sponsor_id);
+        $sponsorship_type=$sponsor->beneficiaries->where('id',$beneficiary_id)->first()->pivot->sponsorship_type;
+        if ($sponsorship_type=='yearly') {
+            $sponsorship_type = 'monthly';
+        } else {
+            $sponsorship_type = 'yearly';
+        }
+        $sponsor->beneficiaries()->updateExistingPivot($beneficiary_id,['sponsorship_type'=>$sponsorship_type]);
+        return Response::json(['message' => 'Beneficiary updated successfully'],200);
+    }
+
+
+
+    //function to delete beneficiary from sponsor
     public function destroyBeneficiary($sponsor_id,$beneficiary_id){
         $sponsor=Sponsor::findOrFail($sponsor_id);
         $beneficiary=FamilyMember::findOrFail($beneficiary_id);
