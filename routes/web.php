@@ -68,5 +68,10 @@ Route::get('admin/streets/create',[AdminController::class,'createStreet'])->midd
 Route::post('admin/streets/store',[AdminController::class,'storeStreet'])->middleware(['auth'])->name('streets.store');
 
 
+//Route for testing purposes
+Route::get('test', function () {
+    return 'test';
+});
+
 
 require __DIR__.'/auth.php';

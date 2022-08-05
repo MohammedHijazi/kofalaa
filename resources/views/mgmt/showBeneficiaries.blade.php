@@ -4,14 +4,26 @@
     </head>
 
     <body>
-    <div class="card ma">
+    <div class="card ma" style="width: 80%; margin-right: 10%; margin-top: 3%">
         <div class="card-header" style=" display: flex; justify-content: space-between; align-content: center; align-items: center; ">ادرة المستفيدين
             <!--search input-->
             <div class="input-group mb-1" style="width: 500px">
                 <input id="search-field" type="text" class="form-control typehead" placeholder="بحث عن مستفيد">
             </div>
+            <input type="hidden" name="beneficiary-id" id="beneficiary-id">
+            <input type="hidden" name="sponsor-id" id="sponsor-id" value="{{$sponsor->id}}">
+            <div class="form-check-inline">
+                <label class="form-check-label">
+                    <input type="radio" class="form-check-input" value="monthly" name="sponsorship-type" id="sponsorship-type" checked>شهري
+                </label>
+            </div>
+            <div class="form-check-inline">
+                <label class="form-check-label">
+                    <input type="radio" class="form-check-input" value="yearly" name="sponsorship-type" id="sponsorship-type">سنوي
+                </label>
+            </div>
 
-            <a class="btn btn-primary" href="#" role="button">اضافة مستفيد</a>
+            <a class="btn btn-primary" id="add-beneficiary" href="#" role="button">اضافة مستفيد</a>
 
         </div>
         <div class="card-body">
@@ -26,7 +38,7 @@
                     <th>عمليات</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="#requests">
                 <tr>
                     <td>#</td>
                     <td>#</td>
@@ -56,16 +68,91 @@
     <!--script fot auto complete family members name when searching for them  -->
     <script>
         $(document).ready(function () {
+            fetchBeneficiaries();
             let path = "{{ route('autocomplete.name') }}";
             $('#search-field').typeahead({
                 source: function (query, process) {
                     return $.get(path, { query: query }, function (data) {
-                            console.log(data);
                         return process(data);
                     });
+                },
+                displayText: function (item) {
+                    return item.id+"-"+item.name;
+                },
+                afterSelect: function (item) {
+                    $('#beneficiary-id').val(item.id);
                 }
             });
         });
+
+        $(document).on('click', '#add-beneficiary', function (e) {
+            e.preventDefault();
+            let data = {
+                'sponsorship-type':  $(this).parent().find('input[name="sponsorship-type"]:checked').val(),
+                'beneficiary-id': $('#beneficiary-id').val(),
+                'sponsor-id':$('#sponsor-id').val()
+            }
+            console.log(data)
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "POST",
+                url: "http://127.0.0.1:8000/api/add_beneficiary",
+                data: data,
+                dataType: "json",
+                success: function (response) {
+                    console.log(response);
+                    fetchBeneficiaries();
+                }
+            });
+
+            });
+
+        <!--script for getting all the beneficiaries of the sponsor-->
+            function fetchBeneficiaries(){
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    type: "GET",
+                    url: "http://127.0.0.1:8000/api/sponsor"+'/'+'<?php echo $sponsor->id; ?>'+'/'+'beneficiaries',
+                    dataType: "json",
+                    success: function (response) {
+                        console.log(response);
+                        let data = response;
+                        let html = '';
+                        for (let i = 0; i < data.length; i++) {
+                            html += '<tr>';
+                            html += '<td>' + (i + 1) + '</td>';
+                            html += '<td>' + data[i].id + '</td>';
+                            html += '<td>' + data[i].name + '</td>';
+                            html += '<td>' + data[i].pivot.sponsorship_type + '</td>';
+                            html += '<td>' + data[i].created_at + '</td>';
+                            html += '<td style="display: flex; flex-direction: row; justify-content: space-evenly">';
+                            html += '<a href="#" class="btn btn-primary">تعديل</a>';
+                            html += '<form action="#" method="post">';
+                            html += '@csrf';
+                            html += '@method("DELETE")';
+                            html += '<button type="submit" class="btn btn-danger" >حذف</button>';
+                            html += '</form>';
+                            html += '</td>';
+                            html += '</tr>';
+                        }
+                        $('#requests tbody').html(html);
+                    },
+                    error: function(response) {
+                        //Do Something to handle error
+                        console.log(response);
+                    }
+                    });
+                }
     </script>
 
     </body>

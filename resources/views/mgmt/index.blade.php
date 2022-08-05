@@ -53,7 +53,7 @@
                             <td>{{$sponsor->institutionSponsor->primary_phone}}</td>
                         @endif
 
-                        <td>#</td>
+                        <td>{{$sponsor->beneficiaries->count()}}</td>
                         <td style="display: flex; flex-direction: row; justify-content: space-between">
                             <a href="{{route('sponsors.beneficiaries',$sponsor->id)}}" class="btn btn-primary" style="margin-left: 5px">ادارة المستفيدين</a>
                             <a href="{{route('sponsors.profile',$sponsor->id)}}" class="btn btn-primary" style="margin-left: 5px">عرض</a>

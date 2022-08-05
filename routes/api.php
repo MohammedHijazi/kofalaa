@@ -24,3 +24,8 @@ Route::get('/data',[SponsorsController::class,'index'])->name('data');
 
 //Route for getting family members' names for autocomplete when searching
 Route::get('autocomplete/name', [SponsorsController::class,'fetch'])->name('autocomplete.name');
+
+
+Route::post('add_beneficiary',[SponsorsController::class,'addBeneficiary'])->name('add.beneficiary');
+
+Route::get('sponsor/{id}/beneficiaries',[SponsorsController::class,'fetchBeneficiaries'])->name('sponsor.beneficiaries');
