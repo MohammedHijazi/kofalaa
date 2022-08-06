@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\SponsorsController;
+use App\Http\Controllers\PaymentsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,11 @@ Route::get('/data',[SponsorsController::class,'index'])->name('data');
 
 //Route for getting family members' names for autocomplete when searching
 Route::get('autocomplete/name', [SponsorsController::class,'fetch'])->name('autocomplete.name');
+
+//
+//Route for getting family members' names for autocomplete when searching
+Route::get('search/{id}/beneficiaries', [PaymentsController::class,'fetchBeneficiaries'])->name('fetch.beneficiaries');
+
 
 //Route for adding a beneficiary to a sponsor
 Route::post('add_beneficiary',[SponsorsController::class,'addBeneficiary'])->name('add.beneficiary');
