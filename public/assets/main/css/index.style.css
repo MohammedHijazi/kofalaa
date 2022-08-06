@@ -1,6 +1,9 @@
 .ma{
     margin: auto;
     width: 85%;
-    border: 3px solid green;
     padding: 10px;
+}
+
+thead{
+    text-align: center;
 }

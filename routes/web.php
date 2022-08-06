@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BeneficiariesController;
 use App\Http\Controllers\FamilyMembersController;
+use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SponsorsController;
 use App\Http\Controllers\StatusController;
@@ -55,6 +56,11 @@ Route::get('search/beneficiaries', [SearchController::class,'searchBeneficiaries
 Route::get('search/beneficiaries/results', [SearchController::class,'searchBeneficiaries'])->middleware('auth')->name('search.beneficiaries.results');
 
 
+
+//payment routes
+
+
+
 //Admin panel routes
 Route::get('admin',[AdminController::class,'index'])->middleware(['auth'])->name('dashboard');
 Route::get('admin/countries',[AdminController::class,'viewCountries'])->middleware(['auth'])->name('countries.view');
@@ -66,6 +72,11 @@ Route::get('admin/cities/{id}/edit',[AdminController::class,'editCity'])->middle
 Route::get('admin/streets',[AdminController::class,'viewStreets'])->middleware(['auth'])->name('streets.view');
 Route::get('admin/streets/create',[AdminController::class,'createStreet'])->middleware(['auth'])->name('streets.create');
 Route::post('admin/streets/store',[AdminController::class,'storeStreet'])->middleware(['auth'])->name('streets.store');
+
+
+//payments routes
+Route::get('payments',[PaymentsController::class,'index'])->middleware(['auth'])->name('payments.index');
+Route::get('payments/create',[PaymentsController::class,'create'])->middleware(['auth'])->name('payments.create');
 
 
 //Route for testing purposes
