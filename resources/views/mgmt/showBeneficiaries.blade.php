@@ -80,7 +80,17 @@
                 },
                 afterSelect: function (item) {
                     $('#beneficiary-id').val(item.id);
-                }
+                },
+                //show hints
+                hint: true,
+                //show suggestions
+                minLength: 0,
+                //show all results on focus
+                items: 'all',
+                //show all data in the dropdown list
+                showAll: true,
+                emptyTemplate: 'No results found...',
+                autoFocus: true,
             });
         });
 

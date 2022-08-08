@@ -78,6 +78,23 @@
                 </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <!--make input fields -->
+                        <td class="col-1">#</td>
+                        <td class="col-1">#</td>
+                        <td class="col-3">#</td>
+                        <td class="col-2"><input class='form-control' type="text" ></td>
+                        <td class="col-2">
+                            <select class="form-control">
+                                <option disabled selected>العملة</option>
+                                <option value="ILS">شيكل</option>
+                                <option value="USD">دولار</option>
+                            </select>
+                        </td>
+                        <td class="col-1">
+                            <a class="btn btn-danger" href="#" role="button">حذف</a>
+                        </td>
+                    </tr>
 
 
                 </tbody>
@@ -112,7 +129,15 @@
                 afterSelect: function (item) {
                     beneficiaryId = item.id;
                     console.log(beneficiaryId);
-                }
+                },
+                //show hints
+                hint: true,
+                //show suggestions
+                minLength: 0,
+                //show all results on focus
+                items: 'all',
+                autoFocus: true,
+
             });
         });
     </script>
