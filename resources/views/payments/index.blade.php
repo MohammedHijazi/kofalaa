@@ -16,20 +16,40 @@
             <table id="requests" class="table table-bordered">
                 <thead>
                 <tr>
-                    <th>#</th>
-                    <th>الرقم</th>
+                    <th class="col-1">#</th>
+                    <th class="col-1">الرقم</th>
                     <th>الرقم الدفتري</th>
-                    <th>الكفيل</th>
-                    <th>التاريخ</th>
-                    <th>المبلغ الاجمالي</th>
+                    <th class="col-2">الكفيل</th>
+                    <th class="col-1">التاريخ</th>
+                    <th class="col-2">المبلغ الاجمالي</th>
                     <th>العملة</th>
                     <th>عدد المستفيدين</th>
-                    <th>عمليات</th>
+                    <th style="width: 140px;">عمليات</th>
                 </tr>
                 </thead>
-                <tbody>
-
-
+                <tbody style="text-align: center">
+                @if($payments->count() > 0)
+                    @foreach($payments as $payment)
+                        <tr>
+                            <td>{{$loop->iteration}}</td>
+                            <td>{{$payment->id}}</td>
+                            <td>{{$payment->ledger_number}}</td>
+                            <td>{{$payment->sponsor->name}}</td>
+                            <td>{{$payment->created_at->format('d/m/Y')}}</td>
+                            <td>{{$payment->total_amount}}</td>
+                            <td>شيكل</td>
+                            <td>{{$payment->beneficiaries->count()}}</td>
+                            <td style="display: flex; flex-direction: row; justify-content: space-evenly">
+                                <a class="btn btn-primary row" href="#" role="button" style="margin-left: 20px;">ادارة</a>
+                                <form action="#" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="btn btn-danger row">حذف</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
                 </tbody>
             </table>
         </div>

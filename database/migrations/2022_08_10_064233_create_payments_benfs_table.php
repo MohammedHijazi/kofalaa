@@ -17,9 +17,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('payment_id')->constrained('payments')->onDelete('cascade');
             $table->foreignId('beneficiary_id')->constrained('family_members')->onDelete('cascade');
-            $table->string('beneficiary_name');
             $table->string('amount')->nullable();
-            $table->enum('currency',['USD','ILS'])->default('ILS');
+            $table->enum('currency',['ILS', 'USD','EUR','GBP','CAD'])->default('ILS');
             $table->timestamps();
         });
     }

@@ -14,7 +14,6 @@ class PaymentManagement extends Model
     protected $fillable = [
         'payment_id',
         'beneficiary_id',
-        'beneficiary_name',
         'amount',
         'currency',
     ];

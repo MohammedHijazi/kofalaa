@@ -15,7 +15,9 @@ class PaymentsController extends Controller
 {
     public function index()
     {
-        return view('payments.index');
+        $payments = Payment::all();
+
+        return view('payments.index', compact('payments'));
     }
 
     //function to get beneficiaries names for their corresponding sponsor for autocomplete when searching
@@ -47,14 +49,12 @@ class PaymentsController extends Controller
 
             for($i=0 ; $i<count($request['beneficiaries_ids']) ; $i++){
                 $beneficiary_id=$request['beneficiaries_ids'][$i];
-                $beneficiary_name=$request['beneficiaries_names'][$i];
                 $amount=$request['amounts'][$i];
                 $currency=$request['currencies'][$i];
 
                 $payment->beneficiaries()->create([
                     'payment_id'=>$payment_id,
                     'beneficiary_id'=>$beneficiary_id,
-                    'beneficiary_name'=>$beneficiary_name,
                     'amount'=>$amount,
                     'currency'=>$currency
                 ]);

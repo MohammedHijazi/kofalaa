@@ -44,13 +44,16 @@ $(document).on('click','#add-payment',function () {
                         <!--make input fields -->
                         <td class="col-1">${count}</td>
                         <td class="col-1"><input name="beneficiaries_ids[]" class="form-control" type="text" value="${beneficiaryId}"></td>
-                        <td class="col-3"><input name="beneficiaries_names[]" class="form-control" type="text" value="${beneficiaryName}"></td>
+                        <td class="col-3"><input name="beneficiaries_names[]" class="form-control" type="text" value="${beneficiaryName}" disabled></td>
                         <td class="col-2"><input name="amounts[]" class='form-control' type="text" ></td>
                         <td class="col-2">
                             <select class="form-control" name="currencies[]">
                                 <option disabled selected>العملة</option>
                                 <option value="ILS">شيكل</option>
                                 <option value="USD">دولار</option>
+                                <option value="EUR">يورو</option>
+                                <option value="GBP">جنيه</option>
+                                <option value="CAD">دولار كندي</option>
                             </select>
                         </td>
                         <td class="col-1">
