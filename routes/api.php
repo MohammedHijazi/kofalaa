@@ -42,3 +42,5 @@ Route::get('sponsor/{sponsor_id}/beneficiary/{beneficiary_id}',[SponsorsControll
 
 //Route for updating a beneficiary's sponsorship type
 Route::get('update/sponsor/{sponsor_id}/beneficiary/{beneficiary_id}',[SponsorsController::class,'updateBeneficiary'])->name('update.beneficiary');
+
+

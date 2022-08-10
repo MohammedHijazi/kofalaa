@@ -53,6 +53,10 @@ class FamilyMember extends Model
         return date('Y-m-d',strtotime($value));
     }
 
+    public function payments(){
+        return $this->hasMany(PaymentManagement::class,'beneficiary_id','id');
+    }
+
 
 
 

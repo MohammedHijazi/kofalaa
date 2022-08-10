@@ -78,7 +78,11 @@ Route::post('admin/streets/store',[AdminController::class,'storeStreet'])->middl
 Route::get('payments',[PaymentsController::class,'index'])->middleware(['auth'])->name('payments.index');
 Route::get('payments/create',[PaymentsController::class,'create'])->middleware(['auth'])->name('payments.create');
 Route::post('payments/store',[PaymentsController::class,'store'])->middleware(['auth'])->name('payments.store');
-
+Route::delete('payments/{id}',[PaymentsController::class,'destroy'])->middleware(['auth'])->name('payments.destroy');
+Route::get('payments/{id}/edit',[PaymentsController::class,'edit'])->middleware(['auth'])->name('payments.edit');
+Route::put('payments/{id}',[PaymentsController::class,'update'])->middleware(['auth'])->name('payments.update');
+//Rote for deleting beneficiary from a payment
+Route::get('payments/{payment_id}/delete',[PaymentsController::class,'destroyBeneficiaryPayment'])->name('ben.payment.destroy');
 
 //Route for testing purposes
 Route::get('test', function () {

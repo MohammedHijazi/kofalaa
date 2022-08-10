@@ -40,8 +40,8 @@
                             <td>شيكل</td>
                             <td>{{$payment->beneficiaries->count()}}</td>
                             <td style="display: flex; flex-direction: row; justify-content: space-evenly">
-                                <a class="btn btn-primary row" href="#" role="button" style="margin-left: 20px;">ادارة</a>
-                                <form action="#" method="post">
+                                <a class="btn btn-primary row" href="{{route('payments.edit',$payment->id)}}" role="button" style="margin-left: 20px;">ادارة</a>
+                                <form action="{{route('payments.destroy',$payment->id)}}" method="post">
                                     @csrf
                                     @method('delete')
                                     <button type="submit" class="btn btn-danger row">حذف</button>

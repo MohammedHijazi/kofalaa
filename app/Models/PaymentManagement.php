@@ -21,4 +21,8 @@ class PaymentManagement extends Model
     public function payment(){
         return $this->belongsTo(Payment::class,'payment_id','id');
     }
+
+    public function member(){
+        return $this->belongsTo(FamilyMember::class,'beneficiary_id','id');
+    }
 }
