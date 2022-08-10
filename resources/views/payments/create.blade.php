@@ -29,7 +29,7 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="">الرقم الدفتري</label>
-                        <input type="text" class="form-control" id="">
+                        <input type="text" class="form-control" id="led-number">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="">الكفيل</label>
@@ -62,43 +62,29 @@
                     <input id="search-field" type="text" class="form-control typehead" placeholder="بحث عن مستفيد">
                 </div>
                 <div class="col-md-2">
-                    <a class="btn btn-primary row" id="add-beneficiary" href="#" role="button">اضافة</a>
+                    <a class="btn btn-primary row" id="add-payment" href="#" role="button">اضافة</a>
                 </div>
             </div>
-
-            <table id="requests" class="table table-bordered">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>الرقم</th>
-                    <th>الاسم</th>
-                    <th>المبلغ</th>
-                    <th>العملة</th>
-                    <th>عمليات</th>
-                </tr>
-                </thead>
-                <tbody>
+            <form action="{{route('payments.store')}}" method="post">
+                @csrf
+                <input type="hidden" name="ledger_number" id="ledger_number">
+                <input type="hidden" name="sponsor_id" id="sp_id">
+                <table id="requests" class="table table-bordered">
+                    <thead>
                     <tr>
-                        <!--make input fields -->
-                        <td class="col-1">#</td>
-                        <td class="col-1">#</td>
-                        <td class="col-3">#</td>
-                        <td class="col-2"><input class='form-control' type="text" ></td>
-                        <td class="col-2">
-                            <select class="form-control">
-                                <option disabled selected>العملة</option>
-                                <option value="ILS">شيكل</option>
-                                <option value="USD">دولار</option>
-                            </select>
-                        </td>
-                        <td class="col-1">
-                            <a class="btn btn-danger" href="#" role="button">حذف</a>
-                        </td>
+                        <th>#</th>
+                        <th>الرقم</th>
+                        <th>الاسم</th>
+                        <th>المبلغ</th>
+                        <th>العملة</th>
+                        <th>عمليات</th>
                     </tr>
-
-
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody id="payments-table">
+                    </tbody>
+                </table>
+                <button type="submit" class="btn btn-primary" style="margin-right: 370px">حفظ</button>
+            </form>
         </div>
     </div>
 
@@ -107,38 +93,5 @@
 @endsection
 
 @section('scripts')
-    <script>
-        $(document).ready(function () {
-            let sponsorId = $('#sponsor-id option:selected').val();
-            let beneficiaryId;
-            let path = "{{route('sponsors.beneficiaries', ':sponsorId')}}";
-            $('.sid').change(function () {
-                sponsorId = $('#sponsor-id option:selected').val();
-                path = "http://127.0.0.1:8000/api/search/"+sponsorId+"/beneficiaries";
-            });
-
-            $('#search-field').typeahead({
-                source: function (query, process) {
-                    return $.get(path, { query: query }, function (data) {
-                        return process(data);
-                    });
-                },
-                displayText: function (item) {
-                    return item.id+"-"+item.name;
-                },
-                afterSelect: function (item) {
-                    beneficiaryId = item.id;
-                    console.log(beneficiaryId);
-                },
-                //show hints
-                hint: true,
-                //show suggestions
-                minLength: 0,
-                //show all results on focus
-                items: 'all',
-                autoFocus: true,
-
-            });
-        });
-    </script>
+    <script src="{{asset('assets/main/js/createPayments.js')}}"></script>
 @endsection

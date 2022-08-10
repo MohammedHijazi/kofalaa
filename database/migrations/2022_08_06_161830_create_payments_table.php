@@ -15,11 +15,8 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->string('ledger_number');
+            $table->string('ledger_number')->unique();
             $table->foreignId('sponsor_id')->constrained('sponsors')->onDelete('cascade');
-            $table->foreignId('beneficiary_id')->constrained('family_members')->onDelete('cascade');
-            $table->string('amount')->nullable();
-            $table->enum('currency',['USD','ILS'])->nullable();
             $table->timestamps();
         });
     }

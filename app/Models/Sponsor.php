@@ -31,4 +31,8 @@ class Sponsor extends Model
             'id'
         )->withPivot('sponsorship_type','created_at','updated_at');
     }
+
+    public function payements(){
+        return $this->hasMany(Payment::class,'sponsor_id','id');
+    }
 }

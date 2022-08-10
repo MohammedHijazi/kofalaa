@@ -77,6 +77,7 @@ Route::post('admin/streets/store',[AdminController::class,'storeStreet'])->middl
 //payments routes
 Route::get('payments',[PaymentsController::class,'index'])->middleware(['auth'])->name('payments.index');
 Route::get('payments/create',[PaymentsController::class,'create'])->middleware(['auth'])->name('payments.create');
+Route::post('payments/store',[PaymentsController::class,'store'])->middleware(['auth'])->name('payments.store');
 
 
 //Route for testing purposes
