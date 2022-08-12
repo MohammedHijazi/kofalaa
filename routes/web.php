@@ -86,7 +86,7 @@ Route::get('payments/{payment_id}/delete',[PaymentsController::class,'destroyBen
 
 //Route for testing purposes
 Route::get('test', function () {
-    return 'test';
+    dd(\App\Models\Payment::find(5)->total_amount);
 });
 
 

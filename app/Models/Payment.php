@@ -14,6 +14,10 @@ class Payment extends Model
         'sponsor_id',
     ];
 
+    protected $appends = [
+      'sponsor_name','total_amount','creation_date','beneficiaries_count'
+    ];
+
     public function getTotalAmountAttribute(){
         $total_amount=0;
         foreach($this->beneficiaries as $beneficiary) {
@@ -31,6 +35,18 @@ class Payment extends Model
             }
         }
         return $total_amount;
+    }
+
+    public function getSponsorNameAttribute(){
+        return $this->sponsor->name;
+    }
+
+    public function getBeneficiariesCountAttribute(){
+        return $this->beneficiaries->count();
+    }
+
+    public function getCreationDateAttribute(){
+        return $this->created_at->format('d/m/Y');
     }
 
     public function sponsor(){

@@ -17,12 +17,44 @@ class PaymentsController extends Controller
     public function index(Request $request)
     {
         $request = $request->all();
+        //beneficiary_id
+        $bid = $request['beneficiaryId'];
+        //sponsor_id
+        $sid = $request['sponsorId'];
+        //payment_ID
+        $pid = $request['payment_no'];
+        $ledger_no= $request['led_no'];
+        $start_date = $request['start_date'];
+        $end_date = $request['end_date'];
+
+
         $payments = new Payment();
 
+        if($bid != null){
+            $payments = $payments->whereHas('beneficiaries', function ($q) use ($bid) {
+                $q->where('beneficiary_id', $bid);
+            });
+        }elseif ($sid != null) {
+            $payments = $payments->where('sponsor_id', $sid);
+        }elseif ($pid) {
+            $payments = $payments->where('id', $pid);
+        }elseif ($ledger_no != null) {
+            $payments = $payments->where('ledger_no', $ledger_no);
+        }elseif ($start_date != null) {
+            $payments = $payments->where('created_at', '>=', $start_date);
+        }elseif ($end_date != null) {
+            $payments = $payments->where('created_at', '<=', $end_date);
+        }
 
 
-        $payments->get();
-        return Response::json($request);
+        $payments=$payments->get();
+
+        return Response::json([
+            'status' => 'success',
+            'data' => $payments,
+            'request' => $request
+        ], 200);
+
     }
 
 

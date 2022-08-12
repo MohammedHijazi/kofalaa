@@ -1,5 +1,5 @@
-let beneficiaryId;
-let sponsorId;
+let beneficiaryId='';
+let sponsorId='';
 
 
 
@@ -8,9 +8,12 @@ $(document).on('click', '#search-but', function () {
     fetchData()
 });
 
+
 //function to fetch data
 function fetchData() {
     $('tbody').empty();
+    //remove th from table
+    $('#ops').remove();
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -28,8 +31,31 @@ function fetchData() {
             end_date: $('#end-date').val(),
         },
         success: function (data) {
-            console.log(data);
-
+            $.each(data.data, function (key, value) {
+                console.log(value);
+                $('tbody').append(
+                    `
+                    <tr>
+                            <td>${key+1}</td>
+                            <td>${value.id}</td>
+                            <td>${value.ledger_number}</td>
+                            <td>${value.sponsor_name}</td>
+                            <td>${value.creation_date}</td>
+                            <td>${value.total_amount}</td>
+                            <td>شيكل</td>
+                            <td>${value.beneficiaries_count}</td>
+<!--                            <td style="display: flex; flex-direction: row; justify-content: space-evenly">-->
+<!--                                <a class="btn btn-primary row" href="{{route('payments.edit',$payment->id)}}" role="button" style="margin-left: 20px;">ادارة</a>-->
+<!--                                <form action="{{route('payments.destroy',$payment->id)}}" method="post">-->
+<!--                                    @csrf-->
+<!--                                    @method('delete')-->
+<!--                                    <button type="submit" class="btn btn-danger row">حذف</button>-->
+<!--                                </form>-->
+<!--                            </td>-->
+                        </tr>
+                    `
+                );
+            });
         }
     });
 }

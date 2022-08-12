@@ -74,7 +74,7 @@
                     <th class="col-2">المبلغ الاجمالي</th>
                     <th>العملة</th>
                     <th>عدد المستفيدين</th>
-                    <th style="width: 140px;">عمليات</th>
+                    <th id="ops" style="width: 140px;">عمليات</th>
                 </tr>
                 </thead>
                 <tbody style="text-align: center">
@@ -84,11 +84,11 @@
                             <td>{{$loop->iteration}}</td>
                             <td>{{$payment->id}}</td>
                             <td>{{$payment->ledger_number}}</td>
-                            <td>{{$payment->sponsor->name}}</td>
-                            <td>{{$payment->created_at->format('d/m/Y')}}</td>
+                            <td>{{$payment->sponsor_name}}</td>
+                            <td>{{$payment->creation_date}}</td>
                             <td>{{$payment->total_amount}}</td>
                             <td>شيكل</td>
-                            <td>{{$payment->beneficiaries->count()}}</td>
+                            <td>{{$payment->beneficiaries_count}}</td>
                             <td style="display: flex; flex-direction: row; justify-content: space-evenly">
                                 <a class="btn btn-primary row" href="{{route('payments.edit',$payment->id)}}" role="button" style="margin-left: 20px;">ادارة</a>
                                 <form action="{{route('payments.destroy',$payment->id)}}" method="post">
