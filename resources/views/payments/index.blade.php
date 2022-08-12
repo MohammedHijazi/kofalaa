@@ -2,17 +2,67 @@
 
 @section('styles')
     <link rel="stylesheet" href="{{asset('assets/main/css/index.style.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/main/css/payments.index.style.css')}}">
 @endsection
 
 @section('content')
     <div class="card ma">
         <div class="card-header" style=" display: flex; justify-content: space-between; align-content: center; align-items: center; ">ادارة الكفلاء
 
-            <a class="btn btn-primary" href="#" role="button">بحث عن دفعة</a>
+            <a class="btn btn-primary" id="search-button" role="button">بحث عن دفعة</a>
             <a class="btn btn-primary" href="{{route('payments.create')}}" role="button">اضافة دفعة</a>
 
         </div>
         <div class="card-body">
+            <div class="search-card">
+                <fieldset >
+                    <!-- make first row -->
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="">رقم الدفعة</label>
+                            <input type="text" class="form-control" id="payment-no">
+                        </div>
+                        <!--Date  input-->
+                        <div class="form-group col-md-6">
+                            <label for="">الرقم الدفتري</label>
+                            <input type="text" class="form-control" id="led-no">
+                        </div>
+                    </div>
+                    <!-- make second row -->
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="">الكفيل</label>
+                            <!--select from dropdown list-->
+                            <input id="sponsor-name" type="text" class="form-control s-typehead" placeholder="الكفيل">
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label for="">المستفيد</label>
+                            <!--select from dropdown list-->
+                            <input id="beneficiary-name" type="text" class="form-control b-typehead" placeholder="المستفيد">
+                        </div>
+                    </div>
+                    <!-- make third row for date from to date to input -->
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="">من</label>
+                            <input type="date" class="form-control" id="start-date">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="">إلى</label>
+                            <input type="date" class="form-control" id="end-date">
+                        </div>
+                    </div>
+                    <!-- make fourth row for search button -->
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <button class="btn btn-primary" id="search-but" role="button">بحث</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+
             <table id="requests" class="table table-bordered">
                 <thead>
                 <tr>
@@ -54,4 +104,8 @@
             </table>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+<script src="{{asset('assets/main/js/searchPayments.js')}}"></script>
 @endsection

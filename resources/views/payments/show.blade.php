@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('styles')
-    <link rel="stylesheet" href="{{asset('assets/main/css/payments.index.style.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/main/css/index.style.css')}}">
 @endsection
 
 @section('content')
@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="card-body">
-            <fieldset>
+            <fieldset >
                 <!-- make first row -->
                 <div class="row">
                     <div class="form-group col-md-6">

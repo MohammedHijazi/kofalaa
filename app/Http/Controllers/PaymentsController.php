@@ -17,7 +17,6 @@ class PaymentsController extends Controller
     public function index()
     {
         $payments = Payment::all();
-
         return view('payments.index', compact('payments'));
     }
 
@@ -45,7 +44,6 @@ class PaymentsController extends Controller
                 'sponsor_id'=>$sponsor_id
             ]);
 
-            $payment_id = $payment->id;
 
             for($i=0 ; $i<count($request['beneficiaries_ids']) ; $i++){
                 $beneficiary_id=$request['beneficiaries_ids'][$i];
@@ -53,7 +51,6 @@ class PaymentsController extends Controller
                 $currency=$request['currencies'][$i];
 
                 $payment->beneficiaries()->create([
-                    'payment_id'=>$payment_id,
                     'beneficiary_id'=>$beneficiary_id,
                     'amount'=>$amount,
                     'currency'=>$currency
@@ -79,7 +76,6 @@ class PaymentsController extends Controller
 
     public function update(Request $request, $id){
         $request=$request->all();
-//        dd($request);
         $payment = Payment::find($id);
 
         $bpids = $request['bpids'];

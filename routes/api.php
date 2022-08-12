@@ -24,7 +24,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/data',[SponsorsController::class,'index'])->name('data');
 
 //Route for getting family members' names for autocomplete when searching
-Route::get('autocomplete/name', [SponsorsController::class,'fetch'])->name('autocomplete.name');
+Route::get('autocomplete/benf/name', [SponsorsController::class,'fetchBenf']);
+
+//Route for getting Sponsors names for autocomplete when searching
+Route::get('autocomplete/spons/name', [SponsorsController::class,'fetchSpons']);
 
 //
 //Route for getting family members' names for autocomplete when searching
@@ -44,3 +47,4 @@ Route::get('sponsor/{sponsor_id}/beneficiary/{beneficiary_id}',[SponsorsControll
 Route::get('update/sponsor/{sponsor_id}/beneficiary/{beneficiary_id}',[SponsorsController::class,'updateBeneficiary'])->name('update.beneficiary');
 
 
+Route::resource('payments','Api\PaymentsController');

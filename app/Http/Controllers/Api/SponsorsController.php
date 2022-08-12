@@ -21,10 +21,18 @@ class SponsorsController extends Controller
     }
 
     //function to get family members' names for autocomplete when searching
-    public function fetch(Request $request){
+    public function fetchBenf(Request $request){
         $request = $request->all();
         $name = $request['query'];
         $result = FamilyMember::where('name','like','%'.$name.'%')->get(['name','id']);
+        return Response::json($result);
+    }
+
+    //function to get family members' names for autocomplete when searching
+    public function fetchSpons(Request $request){
+        $request = $request->all();
+        $name = $request['query'];
+        $result = Sponsor::where('name','like','%'.$name.'%')->get(['name','id']);
         return Response::json($result);
     }
 
