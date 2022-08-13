@@ -34,7 +34,8 @@ class Payment extends Model
                 $total_amount += ($beneficiary->amount * 1.5);
             }
         }
-        return $total_amount;
+        //return ceil value of total amount
+        return ceil($total_amount);
     }
 
     public function getSponsorNameAttribute(){
