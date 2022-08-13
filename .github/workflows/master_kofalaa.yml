@@ -56,5 +56,5 @@ jobs:
         with:
           app-name: 'Kofalaa'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_55B9082E86A24981B5D5CB119CBBAF7B }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0CFEFD0FFFC5473D968E0538EA54E65E }}
           package: .
