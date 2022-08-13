@@ -7,10 +7,15 @@
 
 @section('content')
     <div class="card ma">
-        <div class="card-header" style=" display: flex; justify-content: space-between; align-content: center; align-items: center; ">ادارة الكفلاء
-
+        <div class="card-header row">
+            <h5 style="margin-left: 760px;">ادارة الكفلاء</h5>
             <a class="btn btn-primary" id="search-button" role="button">بحث عن دفعة</a>
-            <a class="btn btn-primary" href="{{route('payments.create')}}" role="button">اضافة دفعة</a>
+            <a style="margin-right: 20px;" class="btn btn-primary" href="{{route('payments.create')}}" role="button">اضافة دفعة</a>
+            <!--button for open import excel modal-->
+            <button style="margin-right: 20px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#import-excel-modal">
+                اضافة من اكسل
+            </button>
+            @extends('payments.importFile')
 
         </div>
         <div class="card-body">
