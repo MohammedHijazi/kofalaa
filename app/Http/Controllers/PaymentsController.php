@@ -26,6 +26,16 @@ class PaymentsController extends Controller
         return Response::json($result);
     }
 
+    //function to import payments from excel file
+    public function import(Request $request){
+        $request->validate([
+            'file' => 'required|mimes:xls,xlsx,csv'
+        ]);
+
+        return view('payments.index')->with('success','Payments imported successfully.');
+
+    }
+
     public function create()
     {
         $sponsors=Sponsor::all('id','name');

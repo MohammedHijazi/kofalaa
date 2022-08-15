@@ -24,7 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/data',[SponsorsController::class,'index'])->name('data');
 
 //Route for getting family members' names for autocomplete when searching
-Route::get('autocomplete/benf/name', [SponsorsController::class,'fetchBenf']);
+Route::get('autocomplete/benf/name', [SponsorsController::class,'fetchBenf'])->name('autocomplete.benf.name');
 
 //Route for getting Sponsors names for autocomplete when searching
 Route::get('autocomplete/spons/name', [SponsorsController::class,'fetchSpons']);

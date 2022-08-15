@@ -11,12 +11,22 @@ class PaymentManagement extends Model
 
     protected $table = 'payments_benfs';
 
+    protected $appends = [
+        'ledger_number'
+    ];
+
     protected $fillable = [
         'payment_id',
         'beneficiary_id',
         'amount',
         'currency',
     ];
+
+    public function getLedgerNumberAttribute()
+    {
+        return $this->payment->ledger_number;
+    }
+
 
     public function payment(){
         return $this->belongsTo(Payment::class,'payment_id','id');

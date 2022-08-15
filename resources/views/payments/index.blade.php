@@ -8,12 +8,12 @@
 @section('content')
     <div class="card ma">
         <div class="card-header row">
-            <h5 style="margin-left: 760px;">ادارة الكفلاء</h5>
+            <h5 style="margin-left: 760px;">ادارة الدفعات</h5>
             <a class="btn btn-primary" id="search-button" role="button">بحث عن دفعة</a>
             <a style="margin-right: 20px;" class="btn btn-primary" href="{{route('payments.create')}}" role="button">اضافة دفعة</a>
             <!--button for open import excel modal-->
-            <button style="margin-right: 20px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#import-excel-modal">
-                اضافة من اكسل
+            <button style="margin-right: 20px;" type="button" class="btn btn-dark" data-toggle="modal" data-target="#import-excel-modal">
+                استيراد من اكسل
             </button>
             @extends('payments.importFile')
 
@@ -95,7 +95,7 @@
                             <td>شيكل</td>
                             <td>{{$payment->beneficiaries_count}}</td>
                             <td style="display: flex; flex-direction: row; justify-content: space-evenly">
-                                <a class="btn btn-primary row" href="{{route('payments.edit',$payment->id)}}" role="button" style="margin-left: 20px;">ادارة</a>
+                                <a class="btn btn-primary row"  href="{{route('payments.edit',$payment->id)}}" role="button" style="margin-left: 20px; margin-bottom: 16px">ادارة</a>
                                 <form action="{{route('payments.destroy',$payment->id)}}" method="post">
                                     @csrf
                                     @method('delete')

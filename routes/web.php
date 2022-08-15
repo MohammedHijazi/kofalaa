@@ -78,6 +78,7 @@ Route::post('admin/streets/store',[AdminController::class,'storeStreet'])->middl
 Route::get('payments',[PaymentsController::class,'index'])->middleware(['auth'])->name('payments.index');
 Route::get('payments/create',[PaymentsController::class,'create'])->middleware(['auth'])->name('payments.create');
 Route::post('payments/store',[PaymentsController::class,'store'])->middleware(['auth'])->name('payments.store');
+Route::post('payments/import',[PaymentsController::class,'import'])->middleware(['auth'])->name('payments.import');
 Route::delete('payments/{id}',[PaymentsController::class,'destroy'])->middleware(['auth'])->name('payments.destroy');
 Route::get('payments/{id}/edit',[PaymentsController::class,'edit'])->middleware(['auth'])->name('payments.edit');
 Route::put('payments/{id}',[PaymentsController::class,'update'])->middleware(['auth'])->name('payments.update');
@@ -86,7 +87,7 @@ Route::get('payments/{payment_id}/delete',[PaymentsController::class,'destroyBen
 
 //Route for testing purposes
 Route::get('test', function () {
-    dd(\App\Models\Payment::find(5)->total_amount);
+    dd(\App\Models\PaymentManagement::get()->pluck('ledger_number','id')->toArray());
 });
 
 

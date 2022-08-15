@@ -44,14 +44,6 @@ function fetchData() {
                             <td>${value.total_amount}</td>
                             <td>شيكل</td>
                             <td>${value.beneficiaries_count}</td>
-<!--                            <td style="display: flex; flex-direction: row; justify-content: space-evenly">-->
-<!--                                <a class="btn btn-primary row" href="{{route('payments.edit',$payment->id)}}" role="button" style="margin-left: 20px;">ادارة</a>-->
-<!--                                <form action="{{route('payments.destroy',$payment->id)}}" method="post">-->
-<!--                                    @csrf-->
-<!--                                    @method('delete')-->
-<!--                                    <button type="submit" class="btn btn-danger row">حذف</button>-->
-<!--                                </form>-->
-<!--                            </td>-->
                         </tr>
                     `
                 );

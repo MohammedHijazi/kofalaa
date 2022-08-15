@@ -68,7 +68,7 @@
     <script>
         $(document).ready(function () {
             fetchBeneficiaries();
-            let path = "{{ route('autocomplete.name') }}";
+            let path = "{{ route('autocomplete.benf.name') }}";
             $('#search-field').typeahead({
                 source: function (query, process) {
                     return $.get(path, { query: query }, function (data) {
