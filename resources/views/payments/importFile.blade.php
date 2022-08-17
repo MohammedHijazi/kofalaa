@@ -1,5 +1,5 @@
 <div class="modal fade" id="import-excel-modal" tabindex="-1" role="dialog"  aria-hidden="true">
-    <form action="{{route('payments.import')}}" method="post">
+    <form action="{{route('payments.import')}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="modal-dialog modal-l" role="document">
             <div class="modal-content">
@@ -13,7 +13,9 @@
                 <div class="modal-body row" >
                     <div class="col-md-12">
                         <label class="form-label required ">الملف المراد استيراده</label>
-                        <input name="file"  type="file" class="form-control">
+
+                        <input type="file" name="file" class="form-control" required>
+
                         @if(count($errors->get('file')) > 0)
                             <div class="alert alert-danger">
                                 <ul>

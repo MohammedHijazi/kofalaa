@@ -7,6 +7,7 @@ use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SponsorsController;
 use App\Http\Controllers\StatusController;
+use App\Models\Payment;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -87,7 +88,7 @@ Route::get('payments/{payment_id}/delete',[PaymentsController::class,'destroyBen
 
 //Route for testing purposes
 Route::get('test', function () {
-    dd(\App\Models\PaymentManagement::get()->pluck('ledger_number','id')->toArray());
+    dd(Payment::pluck('ledger_number')->toArray());
 });
 
 

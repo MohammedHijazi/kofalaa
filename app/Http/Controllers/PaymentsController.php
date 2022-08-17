@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 
+use App\Imports\PaymentsImport;
 use App\Models\Payment;
 use App\Models\PaymentManagement;
 use App\Models\Sponsor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
+use Maatwebsite\Excel\Facades\Excel;
 use Throwable;
+use function Illuminate\Events\queueable;
 
 
 class PaymentsController extends Controller
@@ -28,11 +31,15 @@ class PaymentsController extends Controller
 
     //function to import payments from excel file
     public function import(Request $request){
-        $request->validate([
-            'file' => 'required|mimes:xls,xlsx,csv'
-        ]);
 
-        return view('payments.index')->with('success','Payments imported successfully.');
+        $request->validate([
+            'file' => 'required|mimes:xls,xlsx'
+        ]);
+        $file = $request->file('file')->path();
+
+        Excel::import(new PaymentsImport, $file);
+
+        return redirect()->back()->with('success', 'Payments imported successfully.');
 
     }
 
