@@ -40,10 +40,26 @@
                     <th class="col-2">اسم الكفيل</th>
                     <th class="col-2">اسم المستفيد</th>
                     <th class="col-2">نوع الكفالة</th>
-                    <th id="ops">عمليات</th>
+                    <th class="col-1" id="ops">عمليات</th>
                 </tr>
                 </thead>
                 <tbody style="text-align: center">
+                @foreach($kl as $k)
+                    <tr>
+                        <td>{{$loop->iteration}}</td>
+                        <td>{{$k->sponsor_name}}</td>
+                        <td>{{$k->beneficiary_name}}</td>
+                        @if($k->sponsorship_type == 'yearly')
+                            <td>سنوي</td>
+                        @else
+                            <td>شهري</td>
+                        @endif
+                        <td>
+                            <!--check box for each row -->
+                            <input type="checkbox" class="checkbox" id="" value="">
+                        </td>
+                    </tr>
+                @endforeach
 
                 </tbody>
             </table>

@@ -6,10 +6,12 @@ use App\Models\City;
 use App\Models\Country;
 use App\Models\Governorate;
 use App\Models\InstitutionSponsor;
+use App\Models\Payment;
 use App\Models\PersonalSponsor;
 use App\Models\Sponsor;
 use App\Models\Street;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Throwable;
 
@@ -322,15 +324,130 @@ class SponsorsController extends Controller
 
     public function showLateSponsors()
     {
-        //define sponsors who are late to their payments to their beneficiaries
-        
+        //define sponsors who are late to their payments to their beneficiaries (yearly)
+        $kafalat_yearly_done = DB::table('beneficiary_sponsor as bs')
+                ->join('family_members as b','bs.beneficiary_id','=','b.id')
+                ->join('sponsors as s','bs.sponsor_id','=','s.id')
+                ->where('bs.sponsorship_type','=','yearly')
+                ->join('payments as p','p.sponsor_id','=','s.id')
+                ->join('payments_benfs as pb','pb.beneficiary_id','=','b.id')
+                ->where('bs.created_at','>',DB::raw('DATE_SUB(CURDATE(), INTERVAL 1 YEAR)'))
+                ->get([
+                    's.id as sponsor_id',
+                    's.name as sponsor_name',
+                    'b.id as beneficiary_id',
+                    'b.name as beneficiary_name',
+                    'bs.sponsorship_type as sponsorship_type',
+                    'bs.created_at as sponsorship_date',
+                    ]);
+
+        $kafalat_yearly_total = DB::table('beneficiary_sponsor as bs')
+            ->join('family_members as b','bs.beneficiary_id','=','b.id')
+            ->join('sponsors as s','bs.sponsor_id','=','s.id')
+            ->where('bs.sponsorship_type','=','yearly')
+            ->get([
+                's.id as sponsor_id',
+                's.name as sponsor_name',
+                'b.id as beneficiary_id',
+                'b.name as beneficiary_name',
+                'bs.sponsorship_type as sponsorship_type',
+                'bs.created_at as sponsorship_date',
+            ]);
+
+
+        //get difference between two queries above and
+        // return the result as an array that contains beneficiary_id and sponsor_id as key_value pairs
+        $kyd=$kafalat_yearly_done->pluck('sponsor_id','beneficiary_id')->toArray();
+        $kyt=$kafalat_yearly_total->pluck('sponsor_id','beneficiary_id')->toArray();
+        $kydiff=array_diff_assoc($kyt,$kyd);
+
+
+        //make query to get sponsors and beneficiaries based on array of difference above
+        $kyl = DB::table('beneficiary_sponsor as bs')
+            ->join('family_members as b','bs.beneficiary_id','=','b.id')
+            ->join('sponsors as s','bs.sponsor_id','=','s.id')
+            ->where('bs.sponsorship_type','=','yearly')
+            ->whereIn('b.id',array_keys($kydiff))
+            ->whereIn('s.id',array_values($kydiff))
+            ->get([
+                's.id as sponsor_id',
+                's.name as sponsor_name',
+                'b.id as beneficiary_id',
+                'b.name as beneficiary_name',
+                'bs.sponsorship_type as sponsorship_type',
+                'bs.created_at as sponsorship_date',
+            ]);
 
 
 
-        dd($sponsors);
+
+        //define sponsors who are late to their payments to their beneficiaries (monthly)
+        $kafalat_monthly_done = DB::table('beneficiary_sponsor as bs')
+            ->join('family_members as b','bs.beneficiary_id','=','b.id')
+            ->join('sponsors as s','bs.sponsor_id','=','s.id')
+            ->where('bs.sponsorship_type','=','monthly')
+            ->join('payments as p','p.sponsor_id','=','s.id')
+            ->join('payments_benfs as pb','pb.beneficiary_id','=','b.id')
+            ->where('bs.created_at','>',DB::raw('DATE_SUB(CURDATE(), INTERVAL 1 MONTH)'))
+            ->get([
+                's.id as sponsor_id',
+                's.name as sponsor_name',
+                'b.id as beneficiary_id',
+                'b.name as beneficiary_name',
+                'bs.sponsorship_type as sponsorship_type',
+                'bs.created_at as sponsorship_date',
+            ]);
+
+        $kafalat_monthly_total = DB::table('beneficiary_sponsor as bs')
+            ->join('family_members as b','bs.beneficiary_id','=','b.id')
+            ->join('sponsors as s','bs.sponsor_id','=','s.id')
+            ->where('bs.sponsorship_type','=','monthly')
+            ->get([
+                's.id as sponsor_id',
+                's.name as sponsor_name',
+                'b.id as beneficiary_id',
+                'b.name as beneficiary_name',
+                'bs.sponsorship_type as sponsorship_type',
+                'bs.created_at as sponsorship_date',
+            ]);
+
+        //get difference between two queries above and
+        // return the result as an array that contains beneficiary_id and sponsor_id as key_value pairs
+        $kmd=$kafalat_monthly_done->pluck('sponsor_id','beneficiary_id')->toArray();
+        $kmt=$kafalat_monthly_total->pluck('sponsor_id','beneficiary_id')->toArray();
+        $kmdiff=array_diff_assoc($kmt,$kmd);
+
+        //make query to get sponsors and beneficiaries based on array of difference above
+        $kml = DB::table('beneficiary_sponsor as bs')
+            ->join('family_members as b','bs.beneficiary_id','=','b.id')
+            ->join('sponsors as s','bs.sponsor_id','=','s.id')
+            ->where('bs.sponsorship_type','=','monthly')
+            ->whereIn('b.id',array_keys($kmdiff))
+            ->whereIn('s.id',array_values($kmdiff))
+            ->get([
+                's.id as sponsor_id',
+                's.name as sponsor_name',
+                'b.id as beneficiary_id',
+                'b.name as beneficiary_name',
+                'bs.sponsorship_type as sponsorship_type',
+                'bs.created_at as sponsorship_date',
+            ]);
+
+        //merge the two collections above
+        $kl = $kyl->merge($kml);
+
+        //shuffle the collection above
+        $kl->shuffle();
+
+
         return view('mgmt.showLateSponsors',[
-            'sponsors' => $sponsors
+            'kl' => $kl
         ]);
+
+
+
+
+
 
     }
 
