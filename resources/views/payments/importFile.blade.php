@@ -1,7 +1,7 @@
 <div class="modal fade" id="import-excel-modal" tabindex="-1" role="dialog"  aria-hidden="true">
     <form action="{{route('payments.import')}}" method="post" enctype="multipart/form-data">
         @csrf
-        <div class="modal-dialog modal-l" role="document">
+        <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title"> استيراد ملف اكسل</h5>
@@ -16,10 +16,11 @@
 
                         <input type="file" name="file" class="form-control" required>
 
-                        @if(count($errors->get('file')) > 0)
+                        <!-- show errors -->
+                        @if(count($errors) > 0)
                             <div class="alert alert-danger">
                                 <ul>
-                                    @foreach($errors->get('file') as $error)
+                                    @foreach($errors->all() as $error)
                                         <li>{{$error}}</li>
                                     @endforeach
                                 </ul>

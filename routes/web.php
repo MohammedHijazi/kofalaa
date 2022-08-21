@@ -28,6 +28,8 @@ Route::get('/', [AdminController::class,'home'])->name('home')->middleware('auth
 Route::resource('sponsors', 'SponsorsController')->middleware('auth');
 Route::get('sponsors/{id}/profile', [SponsorsController::class,'profile'])->middleware('auth')->name('sponsors.profile');
 Route::get('sponsors/{id}/beneficiaries', [SponsorsController::class,'beneficiariesIndex'])->middleware('auth')->name('sponsors.beneficiaries');
+Route::post('sponsors/{id}/sms',[SponsorsController::class,'sendSms'])->middleware('auth')->name('sponsors.sms');
+Route::get('sponsors/show/late', [SponsorsController::class,'showLateSponsors'])->middleware('auth')->name('sponsors.late');
 
 
 //Beneficiaries routes

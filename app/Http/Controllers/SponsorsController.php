@@ -320,6 +320,43 @@ class SponsorsController extends Controller
     }
 
 
+    public function showLateSponsors()
+    {
+        //define sponsors who are late to their payments to their beneficiaries
+        
+
+
+
+        dd($sponsors);
+        return view('mgmt.showLateSponsors',[
+            'sponsors' => $sponsors
+        ]);
+
+    }
+
+
+
+    //function to send sms to sponsor to alert him of being late to a payment using his phone number via nexmo package(vonage)
+    public function sendSms(Request $request,$id)
+    {
+        $basic  = new \Vonage\Client\Credentials\Basic("92a22bb0", "ZMhQdZKF6xXbQ2lu");
+        $client = new \Vonage\Client($basic);
+
+        $response = $client->sms()->send(
+            new \Vonage\SMS\Message\SMS("+970595659651", 'Nepras', 'أنت متأخر على الدفع برجاء الإنتباه')
+        );
+
+        $message = $response->current();
+
+        if ($message->getStatus() == 0) {
+            return redirect()->back()->with('success', 'SMS sent successfully');
+        } else {
+            return redirect()->back()->with('error', 'SMS not sent');
+        }
+
+    }
+
+
 
 }
 

@@ -8,8 +8,9 @@ use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithValidation;
 
-class PaymentsImport implements ToCollection, WithHeadingRow
+class PaymentsImport implements ToCollection, WithHeadingRow, WithValidation
 {
     protected $ledgers;
     protected $sponsors;
@@ -73,6 +74,17 @@ class PaymentsImport implements ToCollection, WithHeadingRow
             }
         }
 
+    }
+
+    public function rules(): array
+    {
+        return [
+            'ledger_number'=>'required',
+            'sponsor_id'=>'required|exists:sponsors,id',
+            'beneficiary_id'=>'required|exists:family_members,id',
+            'amount'=>'required|numeric|min:0',
+            'currency'=>'required|in:ILS,USD,EUR,GBP,CAD'
+        ];
     }
 
 }

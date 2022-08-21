@@ -10,6 +10,8 @@ class Sponsor extends Model
     use HasFactory;
     protected $fillable = ['name', 'email', 'password', 'country','type'];
 
+    protected $appends = ['has_payments'];
+
     public function personalSponsor()
     {
         return $this->hasOne(PersonalSponsor::class, 'sponsor_id', 'id');
@@ -34,5 +36,9 @@ class Sponsor extends Model
 
     public function payements(){
         return $this->hasMany(Payment::class,'sponsor_id','id');
+    }
+
+    public function getHasPaymentsAttribute(){
+        return $this->payements->count();
     }
 }

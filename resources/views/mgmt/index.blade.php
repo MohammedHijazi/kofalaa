@@ -9,6 +9,7 @@
         <div class="card-header" style=" display: flex; justify-content: space-between; align-content: center; align-items: center; ">ادارة الكفلاء
 
             <a class="btn btn-primary" href="{{route('search.index')}}" role="button">بحث عن كفيل</a>
+            <a class="btn btn-primary" href="{{route('sponsors.late')}}" role="button">عرض المتأخرون</a>
             <a class="btn btn-primary" href="{{route('sponsors.create')}}" role="button">اضافة كفيل</a>
 
         </div>
@@ -62,6 +63,12 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger" style="margin-left: 5px">حذف</button>
+                            </form>
+                            <!--button for sending sms to the sponsor-->
+                            <form action="{{route('sponsors.sms',$sponsor->id)}}" method="post">
+                                @csrf
+                                @method('POST')
+                                <button type="submit" class="btn btn-dark" style="margin-left: 5px">ارسال SMS</button>
                             </form>
                         </td>
                     </tr>
