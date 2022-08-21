@@ -56,7 +56,7 @@
                         @endif
                         <td>
                             <!--check box for each row -->
-                            <input type="checkbox" class="checkbox" id="" value="">
+                            <input type="checkbox" class="checkbox" id="" value="{{$k->sponsor_id}}">
                         </td>
                     </tr>
                 @endforeach

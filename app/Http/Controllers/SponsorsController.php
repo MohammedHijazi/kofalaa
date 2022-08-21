@@ -436,18 +436,11 @@ class SponsorsController extends Controller
         //merge the two collections above
         $kl = $kyl->merge($kml);
 
-        //shuffle the collection above
-        $kl->shuffle();
 
 
         return view('mgmt.showLateSponsors',[
             'kl' => $kl
         ]);
-
-
-
-
-
 
     }
 
